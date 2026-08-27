@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラー直感診断</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: #faf9f7;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    position: relative;
+  }
+
+  /* START SCREEN */
+  #start-screen {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+  }
+
+  .logo {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .start-btn {
+    background: linear-gradient(135deg, #ff9a9e, #fecfef, #a18cd1);
+    border: none;
+    border-radius: 50px;
+    padding: 16px 48px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 32px rgba(161,140,209,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(161,140,209,0.45);
+  }
+
+  .note {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* QUIZ SCREEN */
+  #quiz-screen {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .progress-bar-wrap {
+    width: 100%;
+    height: 4px;
+    background: #e8e8e8;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .q-counter {
+    font-size: 12px;
+    color: #bbb;
+    margin-bottom: 8px;
+    align-self: flex-end;
+  }
+
+  .q-label {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 6px;
+    align-self: flex-start;
+  }
+
+  .q-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 36px;
+  }
+
+  /* COLOR CARD */
+  .color-card-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .color-option {
+    border: none;
+    border-radius: 20px;
+    height: 80px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .color-option:active {
+    transform: scale(0.96);
+  }
+
+  .color-option .opt-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+
+  .color-option.selected {
+    box-shadow: 0 0 0 4px #1a1a1a, 0 8px 24px rgba(0,0,0,0.15);
+    transform: scale(1.02);
+  }
+
+  .skip-btn {
+    margin-top: 24px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    padding: 10px 28px;
+    font-size: 13px;
+    color: #aaa;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .skip-btn:hover {
+    border-color: #bbb;
+    color: #888;
+  }
+
+  /* TRANSITION FLASH */
+  .flash {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  /* RESULT SCREEN */
+  #result-screen {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    animation: slideUp 0.6s ease;
+  }
+
+  .result-season-badge {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    margin-bottom: 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+
+  .result-season {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .result-sub {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 28px;
+  }
+
+  .result-desc {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 0 8px;
+  }
+
+  .palette-title {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 14px;
+    align-self: flex-start;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+  }
+
+  .swatch:hover {
+    transform: scale(1.1);
+  }
+
+  .keyword-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+
+  .keyword {
+    background: #f0f0f0;
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: #555;
+  }
+
+  .retry-btn {
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 40px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .retry-btn:hover {
+    background: #333;
+    transform: translateY(-1px);
+  }
+
+  /* SCORE VIZ */
+  .score-section {
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .score-season-label {
+    font-size: 12px;
+    width: 60px;
+    color: #666;
+    flex-shrink: 0;
+  }
+
+  .score-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .score-val {
+    font-size: 11px;
+    color: #bbb;
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- START -->
+  <div id="start-screen">
+    <div class="logo">🎨</div>
+    <div class="title">カラー直感診断</div>
+    <div class="subtitle">
+      色を見て直感で選ぶだけ。<br>
+      16問でパーソナルカラーがわかる。
+    </div>
+    <button class="start-btn" onclick="startQuiz()">診断スタート</button>
+    <div class="note">所要時間：約1〜2分</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-screen">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+    <div class="q-counter" id="q-counter"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="color-card-wrap" id="color-options"></div>
+    <button class="skip-btn" onclick="skipQuestion()">どちらでもない</button>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-screen">
+    <div class="result-season-badge" id="result-badge"></div>
+    <div class="result-season" id="result-season"></div>
+    <div class="result-sub" id="result-sub"></div>
+    <div class="result-desc" id="result-desc"></div>
+    <div class="palette-title">あなたのベストカラー</div>
+    <div class="palette-row" id="palette-row"></div>
+    <div class="keyword-row" id="keyword-row"></div>
+    <div class="score-section" id="score-section"></div>
+    <button class="retry-btn" onclick="resetQuiz()">もう一度診断する</button>
+  </div>
+
+</div>
+
+<div class="flash" id="flash"></div>
+
+<script>
+// =====================
+// QUESTIONS
+// 各質問：テキスト + 2択カード（グラデーション or 単色）
+// =====================
+const questions = [
+  {
+    text: "どちらの色合いに惹かれますか？",
+    options: [
+      { label: "明るく温かい", gradient: "linear-gradient(135deg, #FFD580, #FF9966)", scores: { spring: 3, summer: 0, autumn: 0, winter: 0 } },
+      { label: "澄んで涼しい", gradient: "linear-gradient(135deg, #89CFF0, #B0E0E6)", scores: { spring: 0, summer: 3, autumn: 0, winter: 0 } },
+    ]
+  },
+  {
+    text: "この2色、どちらが好きですか？",
+    options: [
+      { label: "コーラルピンク", gradient: "linear-gradient(135deg, #FF7F7F, #FFB3A7)", scores: { spring: 2, summer: 1, autumn: 0, winter: 0 } },
+      { label: "ワインレッド", gradient: "linear-gradient(135deg, #722F37, #A0444E)", scores: { spring: 0, summer: 0, autumn: 2, winter: 1 } },
+    ]
+  },
+  {
+    text: "自然のグリーン、どちらに近いものが好き？",
+    options: [
+      { label: "黄緑・若草色", gradient: "linear-gradient(135deg, #ADFF2F, #9ACD32)", scores: { spring: 3, summer: 0, autumn: 1, winter: 0 } },
+      { label: "深い森の緑", gradient: "linear-gradient(135deg, #2D4A2D, #3D6B3D)", scores: { spring: 0, summer: 0, autumn: 2, winter: 2 } },
+    ]
+  },
+  {
+    text: "どちらの青が好きですか？",
+    options: [
+      { label: "ベビーブルー", gradient: "linear-gradient(135deg, #ADD8E6, #87CEEB)", scores: { spring: 1, summer: 3, autumn: 0, winter: 0 } },
+      { label: "ロイヤルブルー", gradient: "linear-gradient(135deg, #1E3A8A, #3B5FD4)", scores: { spring: 0, summer: 1, autumn: 0, winter: 3 } },
+    ]
+  },
+  {
+    text: "ニュートラルカラー、どちらが似合いそう？",
+    options: [
+      { label: "ベージュ・キャメル", gradient: "linear-gradient(135deg, #F5DEB3, #C19A6B)", scores: { spring: 2, summer: 0, autumn: 3, winter: 0 } },
+      { label: "グレー・ラベンダー", gradient: "linear-gradient(135deg, #D8D8D8, #C4A4C4)", scores: { spring: 0, summer: 3, autumn: 0, winter: 1 } },
+    ]
+  },
+  {
+    text: "黄色、どちらが好き？",
+    options: [
+      { label: "明るいレモンイエロー", gradient: "linear-gradient(135deg, #FFF44F, #FFE135)", scores: { spring: 2, summer: 1, autumn: 0, winter: 1 } },
+      { label: "深みのあるマスタード", gradient: "linear-gradient(135deg, #E3A020, #A07010)", scores: { spring: 0, summer: 0, autumn: 3, winter: 0 } },
+    ]
+  },
+  {
+    text: "ピンク系で好きなのは？",
+    options: [
+      { label: "桃色・サーモン", gradient: "linear-gradient(135deg, #FFAEB9, #FFA07A)", scores: { spring: 3, summer: 1, autumn: 1, winter: 0 } },
+      { label: "ローズ・ホットピンク", gradient: "linear-gradient(135deg, #FF69B4, #C71585)", scores: { spring: 0, summer: 1, autumn: 0, winter: 3 } },
+    ]
+  },
+  {
+    text: "夕暮れの空の色、どちらが好き？",
+    options: [
+      { label: "パステルグラデ", gradient: "linear-gradient(135deg, #FFD1DC, #FFB347, #87CEEB)", scores: { spring: 2, summer: 2, autumn: 0, winter: 0 } },
+      { label: "鮮やかなオレンジ", gradient: "linear-gradient(135deg, #FF6B35, #F7931E, #C0392B)", scores: { spring: 1, summer: 0, autumn: 3, winter: 1 } },
+    ]
+  },
+  {
+    text: "白に近い色、どちらが好き？",
+    options: [
+      { label: "クリーム・アイボリー", gradient: "linear-gradient(135deg, #FFFDD0, #F5F0DC)", scores: { spring: 2, summer: 0, autumn: 2, winter: 0 } },
+      { label: "ピュアホワイト", gradient: "linear-gradient(135deg, #FFFFFF, #F0F4F8)", scores: { spring: 1, summer: 2, autumn: 0, winter: 3 } },
+    ]
+  },
+  {
+    text: "どちらの紫が好きですか？",
+    options: [
+      { label: "ライラック・薄紫", gradient: "linear-gradient(135deg, #C4A4D4, #B8A4C8)", scores: { spring: 1, summer: 3, autumn: 0, winter: 1 } },
+      { label: "ディープパープル", gradient: "linear-gradient(135deg, #4B0082, #6A0DAD)", scores: { spring: 0, summer: 0, autumn: 1, winter: 3 } },
+    ]
+  },
+  {
+    text: "ブラウン系で好きなのは？",
+    options: [
+      { label: "明るいキャラメル", gradient: "linear-gradient(135deg, #D2691E, #DEB887)", scores: { spring: 3, summer: 0, autumn: 1, winter: 0 } },
+      { label: "チョコレートブラウン", gradient: "linear-gradient(135deg, #3D1C02, #5C2E0D)", scores: { spring: 0, summer: 0, autumn: 3, winter: 1 } },
+    ]
+  },
+  {
+    text: "どちらのグレーが好きですか？",
+    options: [
+      { label: "ライトグレー・シルバー", gradient: "linear-gradient(135deg, #E8E8E8, #C0C0C0)", scores: { spring: 0, summer: 2, autumn: 0, winter: 2 } },
+      { label: "ウォームグレージュ", gradient: "linear-gradient(135deg, #C4B5A5, #B0A090)", scores: { spring: 1, summer: 1, autumn: 2, winter: 0 } },
+    ]
+  },
+  {
+    text: "海の色、どちらが好き？",
+    options: [
+      { label: "南国のターコイズ", gradient: "linear-gradient(135deg, #40E0D0, #00CED1, #20B2AA)", scores: { spring: 2, summer: 2, autumn: 0, winter: 1 } },
+      { label: "深い紺碧の海", gradient: "linear-gradient(135deg, #003366, #0055A5)", scores: { spring: 0, summer: 1, autumn: 0, winter: 3 } },
+    ]
+  },
+  {
+    text: "どちらのオレンジが好き？",
+    options: [
+      { label: "明るいタンジェリン", gradient: "linear-gradient(135deg, #FFA500, #FF8C00)", scores: { spring: 3, summer: 0, autumn: 1, winter: 0 } },
+      { label: "テラコッタ・レンガ", gradient: "linear-gradient(135deg, #C0603B, #A0522D)", scores: { spring: 0, summer: 0, autumn: 3, winter: 0 } },
+    ]
+  },
+  {
+    text: "花の色、どちらに惹かれる？",
+    options: [
+      { label: "桜・チューリップ", gradient: "linear-gradient(135deg, #FFB7C5, #FF8FA3)", scores: { spring: 3, summer: 2, autumn: 0, winter: 0 } },
+      { label: "バラ・ダリア", gradient: "linear-gradient(135deg, #8B0000, #C41E3A)", scores: { spring: 0, summer: 0, autumn: 1, winter: 3 } },
+    ]
+  },
+  {
+    text: "最後！インテリアに使いたい色は？",
+    options: [
+      { label: "ナチュラル・ウッド調", gradient: "linear-gradient(135deg, #DEB887, #CD853F, #8B6914)", scores: { spring: 1, summer: 0, autumn: 3, winter: 0 } },
+      { label: "モノトーン・スタイリッシュ", gradient: "linear-gradient(135deg, #2C2C2C, #666666, #CCCCCC)", scores: { spring: 0, summer: 1, autumn: 0, winter: 3 } },
+    ]
+  },
+];
+
+// =====================
+// SEASON DATA
+// =====================
+const seasons = {
+  spring: {
+    name: "スプリング",
+    en: "Spring / イエベ春",
+    emoji: "🌸",
+    badge: "linear-gradient(135deg, #FFD580, #FF9966, #FFB347)",
+    color: "#FF9966",
+    desc: "明るく透明感のある暖かい色が似合うタイプ。\n肌に黄みがあり、輝くような若々しさが特徴。鮮やかでフレッシュなカラーをまとうと、顔色がパッと明るく見えます。",
+    palette: ["#FFD580","#FF9966","#FF7F7F","#FFB347","#9ACD32","#87CEEB"],
+    keywords: ["フレッシュ","明るい","イエベ","暖色","クリア","春"],
+    barColor: "#FF9966",
+  },
+  summer: {
+    name: "サマー",
+    en: "Summer / ブルベ夏",
+    emoji: "🌿",
+    badge: "linear-gradient(135deg, #B0E0E6, #C4A4C4, #ADD8E6)",
+    color: "#9BBBD4",
+    desc: "やわらかくくすんだ涼やかな色が似合うタイプ。\n肌に青みがあり、上品でエレガントな印象。パステルやグレイッシュなカラーが顔まわりに映えます。",
+    palette: ["#ADD8E6","#C4A4D4","#B0C4DE","#D8BFD8","#98D0BC","#F4C2C2"],
+    keywords: ["エレガント","ソフト","ブルベ","くすみ","涼やか","夏"],
+    barColor: "#9BBBD4",
+  },
+  autumn: {
+    name: "オータム",
+    en: "Autumn / イエベ秋",
+    emoji: "🍂",
+    badge: "linear-gradient(135deg, #C19A6B, #8B4513, #CD853F)",
+    color: "#C0603B",
+    desc: "深みのある温かいアースカラーが似合うタイプ。\n肌に黄みがあり、落ち着いた存在感が魅力。テラコッタやカーキ、ブラウン系をまとうと、こなれた大人の雰囲気になります。",
+    palette: ["#C19A6B","#C0603B","#8B4513","#A0522D","#6B8E23","#D2691E"],
+    keywords: ["大人っぽい","深み","イエベ","アース","温かみ","秋"],
+    barColor: "#C0603B",
+  },
+  winter: {
+    name: "ウィンター",
+    en: "Winter / ブルベ冬",
+    emoji: "❄️",
+    badge: "linear-gradient(135deg, #1E3A8A, #6A0DAD, #2C2C2C)",
+    color: "#3B5FD4",
+    desc: "鮮やかでコントラストの強い色が似合うタイプ。\n肌に青みがあり、シャープでクールな印象。ビビッドカラーやモノトーンを使うと、洗練されたスタイリッシュな雰囲気が際立ちます。",
+    palette: ["#1E3A8A","#C71585","#4B0082","#1C1C1C","#FFFFFF","#00CED1"],
+    keywords: ["クール","スタイリッシュ","ブルベ","鮮やか","コントラスト","冬"],
+    barColor: "#3B5FD4",
+  }
+};
+
+// =====================
+// STATE
+// =====================
+let current = 0;
+let scores = { spring: 0, summer: 0, autumn: 0, winter: 0 };
+
+function startQuiz() {
+  document.getElementById('start-screen').style.display = 'none';
+  const qs = document.getElementById('quiz-screen');
+  qs.style.display = 'flex';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  const total = questions.length;
+
+  document.getElementById('progress-bar').style.width = `${(current / total) * 100}%`;
+  document.getElementById('q-counter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('q-text').textContent = q.text;
+
+  const wrap = document.getElementById('color-options');
+  wrap.innerHTML = '';
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'color-option';
+    btn.style.background = opt.gradient;
+    btn.style.boxShadow = `0 6px 24px rgba(0,0,0,0.12)`;
+    btn.innerHTML = `<span class="opt-label">${opt.label}</span>`;
+    btn.onclick = () => selectOption(opt.scores, btn);
+    wrap.appendChild(btn);
+  });
+}
+
+function selectOption(optScores, btn) {
+  // visual flash
+  const flash = document.getElementById('flash');
+  flash.style.background = btn.style.background;
+  flash.style.opacity = '0.18';
+  setTimeout(() => { flash.style.opacity = '0'; }, 180);
+
+  // add scores
+  for (const s in optScores) {
+    scores[s] += optScores[s];
+  }
+
+  // brief selected state then advance
+  btn.classList.add('selected');
+  setTimeout(() => nextQuestion(), 300);
+}
+
+function skipQuestion() {
+  nextQuestion();
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.style.display = 'flex';
+
+  // Determine winner
+  const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+  const data = seasons[winner];
+
+  // Badge
+  const badge = document.getElementById('result-badge');
+  badge.style.background = data.badge;
+  badge.textContent = data.emoji;
+
+  document.getElementById('result-season').textContent = data.name;
+  document.getElementById('result-sub').textContent = data.en;
+  document.getElementById('result-desc').textContent = data.desc;
+
+  // Palette
+  const paletteRow = document.getElementById('palette-row');
+  paletteRow.innerHTML = '';
+  data.palette.forEach(c => {
+    const sw = document.createElement('div');
+    sw.className = 'swatch';
+    sw.style.background = c;
+    sw.title = c;
+    paletteRow.appendChild(sw);
+  });
+
+  // Keywords
+  const kwRow = document.getElementById('keyword-row');
+  kwRow.innerHTML = '';
+  data.keywords.forEach(kw => {
+    const span = document.createElement('span');
+    span.className = 'keyword';
+    span.textContent = kw;
+    kwRow.appendChild(span);
+  });
+
+  // Score bars
+  const totalScore = Object.values(scores).reduce((a,b) => a+b, 1);
+  const scoreSection = document.getElementById('score-section');
+  scoreSection.innerHTML = '<div style="font-size:13px;color:#999;margin-bottom:14px;">各シーズンの傾向</div>';
+
+  const order = ['spring','summer','autumn','winter'];
+  order.forEach(s => {
+    const pct = Math.round((scores[s] / totalScore) * 100);
+    const row = document.createElement('div');
+    row.className = 'score-row';
+    row.innerHTML = `
+      <div class="score-season-label">${seasons[s].name}</div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill" style="width:0%;background:${seasons[s].barColor}" data-target="${pct}"></div>
+      </div>
+      <div class="score-val">${pct}%</div>
+    `;
+    scoreSection.appendChild(row);
+  });
+
+  // animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.score-bar-fill').forEach(el => {
+      el.style.width = el.dataset.target + '%';
+    });
+  }, 100);
+}
+
+function resetQuiz() {
+  current = 0;
+  scores = { spring: 0, summer: 0, autumn: 0, winter: 0 };
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('start-screen').style.display = 'block';
+}
+</script>
+</body>
+</html>
