@@ -247,6 +247,33 @@
   .compat-label { font-size:16px; font-weight:800; color:#1a1a1a; margin-bottom:10px; }
   .compat-desc { font-size:13px; color:#555; line-height:1.7; }
 
+  /* ===== QUICK COMPAT ===== */
+  .quick-compat-wrap {
+    margin-top: 32px; background: #fff; border-radius: 20px;
+    padding: 20px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    width: 100%; text-align: center;
+  }
+  .quick-compat-title { font-size: 15px; font-weight: 800; color: #1a1a1a; margin-bottom: 4px; }
+  .quick-compat-subtitle { font-size: 12px; color: #aaa; margin-bottom: 16px; }
+  .quick-compat-row { display: flex; align-items: center; gap: 8px; }
+  .quick-compat-col { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .quick-compat-label { font-size: 11px; font-weight: 700; color: #888; }
+  .quick-compat-col select {
+    width: 100%; border: 2px solid #e8e8e8; border-radius: 12px;
+    padding: 10px 8px; font-size: 12px; font-weight: 600;
+    background: #fafafa; cursor: pointer; appearance: none; text-align: center;
+  }
+  .quick-compat-heart { font-size: 20px; color: #ccc; font-weight: 700; flex-shrink: 0; }
+  #qc-result {
+    margin-top: 14px; padding: 14px; background: #faf9f7;
+    border-radius: 14px; animation: fadeIn 0.3s ease;
+  }
+  .qc-stars { font-size: 22px; color: #FFB347; letter-spacing: 2px; }
+  .qc-label { font-size: 14px; font-weight: 800; color: #1a1a1a; margin: 6px 0 4px; }
+  .qc-desc { font-size: 12px; color: #666; line-height: 1.6; }
+  .qc-pair { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
+  .qc-pair-chip { border-radius: 50px; padding: 5px 12px; font-size: 11px; font-weight: 700; color: #fff; }
+
   .retry-btn {
     background: #1a1a1a; color: white; border: none;
     border-radius: 50px; padding: 14px 40px; font-size: 15px; font-weight: 600;
@@ -268,7 +295,7 @@
 
   <div id="start-screen">
     <div class="logo">🌸✨🎀</div>
-    <div class="made-by">Version 0.1 &nbsp;·&nbsp; made by ロイド</div>
+    <div class="made-by">Version 1.0 &nbsp;·&nbsp; made by ロイド</div>
     <div class="title">わたしカラー診断</div>
     <div class="subtitle">色の直感選びで<br>パーソナルカラーと性格タイプがわかる</div>
     <div class="badge-row">
@@ -278,6 +305,28 @@
     </div>
     <button class="start-btn" onclick="startQuiz()">診断スタート</button>
     <div class="note">文章を読む必要なし。色を見て直感で選ぶだけ。</div>
+
+    <!-- Quick Compat -->
+    <div class="quick-compat-wrap">
+      <div class="quick-compat-title">💕 タイプ別 相性チェック</div>
+      <div class="quick-compat-subtitle">診断せずにすぐ確認できる</div>
+      <div class="quick-compat-row">
+        <div class="quick-compat-col">
+          <div class="quick-compat-label">自分</div>
+          <select id="qc-a" onchange="quickCompat()">
+            <option value="">選んで</option>
+          </select>
+        </div>
+        <div class="quick-compat-heart">×</div>
+        <div class="quick-compat-col">
+          <div class="quick-compat-label">相手</div>
+          <select id="qc-b" onchange="quickCompat()">
+            <option value="">選んで</option>
+          </select>
+        </div>
+      </div>
+      <div id="qc-result"></div>
+    </div>
   </div>
 
   <div id="quiz-screen">
@@ -683,6 +732,42 @@ const seasons = {
 // ===== STATE =====
 let current=0, colorScores={spring:0,summer:0,autumn:0,winter:0}, personaScores={E:0,I:0,S:0,N:0};
 let resultTypeKey = '';
+
+// セレクト初期化
+(function initQuickCompatSelects(){
+  const keys = Object.keys(personalityTypes);
+  ['qc-a','qc-b'].forEach(id=>{
+    const sel = document.getElementById(id);
+    keys.forEach(k=>{
+      const p = personalityTypes[k];
+      const opt = document.createElement('option');
+      opt.value = k; opt.textContent = `${p.charAvatar} ${p.name}`;
+      sel.appendChild(opt);
+    });
+  });
+})();
+
+function quickCompat(){
+  const a = document.getElementById('qc-a').value;
+  const b = document.getElementById('qc-b').value;
+  const res = document.getElementById('qc-result');
+  if(!a || !b){ res.innerHTML=''; return; }
+  const ptA = personalityTypes[a], ptB = personalityTypes[b];
+  const r = compatData(a, b);
+  const stars = '★'.repeat(r.stars)+'☆'.repeat(5-r.stars);
+  const seasonColors = {spring:'#FF9966',summer:'#9BBBD4',autumn:'#C0603B',winter:'#3B5FD4'};
+  const sA = a.split('_')[0], sB = b.split('_')[0];
+  res.innerHTML=`
+    <div class="qc-pair">
+      <span class="qc-pair-chip" style="background:${seasonColors[sA]}">${ptA.charAvatar} ${ptA.charName}</span>
+      <span style="color:#ccc;font-size:14px">×</span>
+      <span class="qc-pair-chip" style="background:${seasonColors[sB]}">${ptB.charAvatar} ${ptB.charName}</span>
+    </div>
+    <div class="qc-stars">${stars}</div>
+    <div class="qc-label">${r.label}</div>
+    <div class="qc-desc">${r.desc}</div>
+  `;
+}
 
 function startQuiz() {
   document.getElementById('start-screen').style.display='none';
