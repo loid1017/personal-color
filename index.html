@@ -25,321 +25,221 @@
     align-items: center;
     justify-content: center;
     padding: 24px 20px;
-    position: relative;
   }
 
   /* ===== START ===== */
   #start-screen { text-align: center; animation: fadeIn 0.8s ease; }
-
   .logo { font-size: 52px; margin-bottom: 16px; }
-
-  .title {
-    font-size: 26px;
-    font-weight: 800;
-    color: #1a1a1a;
-    letter-spacing: 0.03em;
-    margin-bottom: 8px;
+  .made-by {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg,#a18cd1,#fbc2eb);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 10px;
   }
-
-  .subtitle {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 12px;
-    line-height: 1.7;
-  }
-
-  .badge-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 36px;
-  }
-
-  .badge {
-    background: #f0f0f0;
-    border-radius: 50px;
-    padding: 5px 14px;
-    font-size: 12px;
-    color: #666;
-  }
-
+  .title { font-size: 26px; font-weight: 800; color: #1a1a1a; letter-spacing: 0.03em; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 12px; line-height: 1.7; }
+  .badge-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 36px; }
+  .badge { background: #f0f0f0; border-radius: 50px; padding: 5px 14px; font-size: 12px; color: #666; }
   .start-btn {
-    background: linear-gradient(135deg, #ff9a9e, #fecfef, #a18cd1);
-    border: none;
-    border-radius: 50px;
-    padding: 16px 52px;
-    font-size: 16px;
-    font-weight: 700;
-    color: white;
-    cursor: pointer;
+    background: linear-gradient(135deg,#ff9a9e,#fecfef,#a18cd1);
+    border: none; border-radius: 50px; padding: 16px 52px;
+    font-size: 16px; font-weight: 700; color: white; cursor: pointer;
     text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     box-shadow: 0 8px 32px rgba(161,140,209,0.35);
     transition: transform 0.2s, box-shadow 0.2s;
   }
-
   .start-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(161,140,209,0.45); }
-  .made-by {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #a18cd1, #fbc2eb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
-  }
-
   .note { margin-top: 18px; font-size: 12px; color: #bbb; }
 
   /* ===== QUIZ ===== */
   #quiz-screen { width: 100%; display: none; flex-direction: column; align-items: center; }
-
-  .progress-bar-wrap {
-    width: 100%; height: 4px; background: #e8e8e8;
-    border-radius: 2px; margin-bottom: 28px;
-  }
-
-  .progress-bar {
-    height: 100%; border-radius: 2px;
-    background: linear-gradient(90deg, #a18cd1, #fbc2eb);
-    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
-  }
-
+  .progress-bar-wrap { width: 100%; height: 4px; background: #e8e8e8; border-radius: 2px; margin-bottom: 28px; }
+  .progress-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg,#a18cd1,#fbc2eb); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
   .q-counter { font-size: 12px; color: #bbb; margin-bottom: 8px; align-self: flex-end; }
-
   .q-phase {
-    align-self: flex-start;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 50px;
-    margin-bottom: 14px;
-    color: white;
+    align-self: flex-start; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 50px; margin-bottom: 14px; color: white;
   }
-
-  .q-text {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-align: center;
-    line-height: 1.5;
-    margin-bottom: 32px;
-  }
-
+  .q-text { font-size: 20px; font-weight: 700; color: #1a1a1a; text-align: center; line-height: 1.5; margin-bottom: 32px; }
   .color-card-wrap { width: 100%; display: flex; flex-direction: column; gap: 14px; }
-
   .color-option {
-    border: none;
-    border-radius: 20px;
-    height: 80px;
-    cursor: pointer;
+    border: none; border-radius: 20px; height: 80px; cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   }
-
   .color-option:active { transform: scale(0.96); }
-
-  .color-option .opt-label {
-    font-size: 15px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.92);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
-    pointer-events: none;
-  }
-
-  .color-option.selected {
-    box-shadow: 0 0 0 4px #1a1a1a, 0 8px 24px rgba(0,0,0,0.15);
-    transform: scale(1.02);
-  }
-
-  /* personality questions */
+  .color-option .opt-label { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.92); text-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: none; }
+  .color-option.selected { box-shadow: 0 0 0 4px #1a1a1a, 0 8px 24px rgba(0,0,0,0.15); transform: scale(1.02); }
   .text-option-wrap { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-
   .text-option {
-    border: 2px solid #eee;
-    border-radius: 16px;
-    padding: 18px 20px;
-    background: white;
-    cursor: pointer;
-    text-align: left;
+    border: 2px solid #eee; border-radius: 16px; padding: 18px 20px;
+    background: white; cursor: pointer; text-align: left;
     transition: border-color 0.2s, background 0.2s, transform 0.15s;
-    font-size: 15px;
-    color: #333;
-    line-height: 1.5;
+    font-size: 15px; color: #333; line-height: 1.5;
   }
-
   .text-option:hover { border-color: #c4a4d4; background: #fdf8ff; }
   .text-option.selected { border-color: #a18cd1; background: #f5eeff; transform: scale(1.01); }
   .text-option .opt-sub { font-size: 12px; color: #aaa; margin-top: 4px; }
-
   .skip-btn {
-    margin-top: 20px;
-    background: none;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    padding: 10px 28px;
-    font-size: 13px;
-    color: #aaa;
-    cursor: pointer;
-    transition: border-color 0.2s;
+    margin-top: 20px; background: none; border: 1px solid #ddd;
+    border-radius: 50px; padding: 10px 28px; font-size: 13px; color: #aaa; cursor: pointer;
   }
-  .skip-btn:hover { border-color: #bbb; color: #888; }
 
   /* ===== RESULT ===== */
   #result-screen { width: 100%; display: none; flex-direction: column; align-items: center; animation: slideUp 0.6s ease; }
 
-  .result-badge {
-    width: 130px; height: 130px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 54px; margin-bottom: 16px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  /* Character card */
+  .char-card {
+    width: 100%; border-radius: 28px; padding: 28px 24px 24px;
+    text-align: center; margin-bottom: 20px; position: relative; overflow: hidden;
   }
-
-  .result-type {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-    text-transform: uppercase; color: #aaa; margin-bottom: 6px;
+  .char-card-bg {
+    position: absolute; inset: 0; opacity: 0.12;
+    background-size: cover; background-position: center;
   }
-
-  .result-name {
-    font-size: 30px; font-weight: 800; color: #1a1a1a;
-    margin-bottom: 4px; text-align: center;
-  }
-
-  .result-tagline {
-    font-size: 14px; color: #999; margin-bottom: 28px; text-align: center;
+  .char-avatar { font-size: 80px; line-height: 1; margin-bottom: 10px; display: block; position: relative; }
+  .char-name { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: white; opacity: 0.8; margin-bottom: 4px; position: relative; }
+  .char-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 6px; position: relative; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .char-tagline { font-size: 13px; color: rgba(255,255,255,0.85); position: relative; }
+  .char-type-badge {
+    display: inline-block; background: rgba(255,255,255,0.25); border-radius: 50px;
+    padding: 4px 14px; font-size: 11px; color: white; font-weight: 600;
+    margin-top: 10px; position: relative; letter-spacing: 0.05em;
   }
 
   /* tabs */
-  .tab-bar {
-    display: flex; width: 100%; border-bottom: 2px solid #eee;
-    margin-bottom: 24px; gap: 0;
-  }
-
+  .tab-bar { display: flex; width: 100%; border-bottom: 2px solid #eee; margin-bottom: 24px; }
   .tab-btn {
-    flex: 1; padding: 10px 0; font-size: 13px; font-weight: 600;
+    flex: 1; padding: 10px 0; font-size: 12px; font-weight: 600;
     color: #bbb; background: none; border: none; cursor: pointer;
     border-bottom: 2px solid transparent; margin-bottom: -2px;
     transition: color 0.2s, border-color 0.2s;
   }
-
   .tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; }
-
   .tab-content { width: 100%; display: none; }
   .tab-content.active { display: block; }
 
   /* color tab */
-  .season-header {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 16px;
-  }
-
+  .season-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
   .season-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; }
-
   .season-name { font-size: 18px; font-weight: 700; }
   .season-en { font-size: 12px; color: #aaa; }
-
-  .section-desc {
-    font-size: 14px; color: #555; line-height: 1.8;
-    margin-bottom: 20px;
-  }
-
+  .section-desc { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 20px; }
   .palette-label { font-size: 12px; color: #aaa; margin-bottom: 10px; }
-
   .palette-row { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
-
-  .swatch {
-    width: 44px; height: 44px; border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    transition: transform 0.2s;
-    cursor: default;
-  }
+  .swatch { width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: transform 0.2s; cursor: default; }
   .swatch:hover { transform: scale(1.12); }
 
-  /* personality tab */
-  .persona-card {
-    background: white; border-radius: 20px;
-    padding: 20px; margin-bottom: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  }
-
-  .persona-card-title {
-    font-size: 13px; font-weight: 700;
-    color: #aaa; letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
-
-  .persona-card-body { font-size: 14px; color: #444; line-height: 1.8; }
-
+  /* persona tab */
   .trait-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-
-  .trait-tag {
-    background: #f5eeff; border-radius: 50px;
-    padding: 6px 14px; font-size: 13px; color: #7c5cbf;
-    font-weight: 600;
-  }
-
+  .trait-tag { background: #f5eeff; border-radius: 50px; padding: 6px 14px; font-size: 13px; color: #7c5cbf; font-weight: 600; }
+  .persona-card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+  .persona-card-title { font-size: 12px; font-weight: 700; color: #aaa; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .persona-card-body { font-size: 14px; color: #444; line-height: 1.8; }
   .compat-row { display: flex; gap: 12px; flex-wrap: wrap; }
-
-  .compat-card {
-    flex: 1; min-width: 120px; background: #fafafa;
-    border-radius: 14px; padding: 14px;
-    text-align: center;
-  }
-
+  .compat-card { flex: 1; min-width: 120px; background: #fafafa; border-radius: 14px; padding: 14px; text-align: center; }
   .compat-emoji { font-size: 28px; margin-bottom: 6px; }
   .compat-name { font-size: 13px; font-weight: 700; color: #333; margin-bottom: 4px; }
   .compat-desc { font-size: 11px; color: #aaa; line-height: 1.4; }
 
+  /* fortune tab */
+  .fortune-header {
+    text-align: center; margin-bottom: 24px;
+  }
+  .fortune-moon { font-size: 48px; margin-bottom: 8px; }
+  .fortune-title { font-size: 18px; font-weight: 800; color: #1a1a1a; margin-bottom: 4px; }
+  .fortune-subtitle { font-size: 13px; color: #aaa; }
+
+  .fortune-card {
+    border-radius: 20px; padding: 20px; margin-bottom: 14px;
+    position: relative; overflow: hidden;
+  }
+  .fortune-card-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .fortune-card-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .fortune-card-body { font-size: 14px; line-height: 1.8; }
+
+  .fortune-lucky { background: linear-gradient(135deg, #fff8e7, #ffecd2); }
+  .fortune-lucky .fortune-card-title { color: #d4820a; }
+  .fortune-lucky .fortune-card-body { color: #555; }
+
+  .fortune-action { background: linear-gradient(135deg, #e8f5e9, #d4edda); }
+  .fortune-action .fortune-card-title { color: #2d6a2d; }
+  .fortune-action .fortune-card-body { color: #444; }
+
+  .fortune-caution { background: linear-gradient(135deg, #fce4ec, #f8d7da); }
+  .fortune-caution .fortune-card-title { color: #c62828; }
+  .fortune-caution .fortune-card-body { color: #555; }
+
+  .fortune-message {
+    border-radius: 20px; padding: 24px; margin-bottom: 14px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .fortune-message-quote { font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+  .fortune-message-body { font-size: 16px; font-weight: 700; color: white; line-height: 1.7; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+
+  .lucky-items-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .lucky-item { background: white; border-radius: 50px; padding: 6px 14px; font-size: 13px; color: #555; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
   /* score tab */
-  .score-row {
-    display: flex; align-items: center;
-    gap: 10px; margin-bottom: 12px;
-  }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .score-label { font-size: 12px; width: 72px; color: #666; flex-shrink: 0; }
-  .score-bar-bg {
-    flex: 1; height: 8px; background: #eee;
-    border-radius: 4px; overflow: hidden;
-  }
+  .score-bar-bg { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
   .score-bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
   .score-val { font-size: 11px; color: #bbb; width: 28px; text-align: right; flex-shrink: 0; }
-
   .axis-section { margin-top: 24px; }
   .axis-title { font-size: 12px; color: #aaa; margin-bottom: 14px; }
   .axis-bar-wrap { margin-bottom: 16px; }
   .axis-labels { display: flex; justify-content: space-between; margin-bottom: 6px; }
   .axis-lbl { font-size: 12px; color: #888; }
   .axis-track { height: 10px; background: #eee; border-radius: 5px; position: relative; }
-  .axis-fill {
-    position: absolute; top: 0; height: 100%;
-    border-radius: 5px; transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+  .axis-fill { position: absolute; top: 0; height: 100%; border-radius: 5px; transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+  .axis-thumb { position: absolute; top: 50%; width: 18px; height: 18px; background: white; border: 3px solid #a18cd1; border-radius: 50%; transform: translate(-50%,-50%); transition: left 0.8s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+
+  /* share card */
+  .share-section { width: 100%; margin-bottom: 24px; }
+  .share-card {
+    border-radius: 24px; padding: 28px 24px; text-align: center;
+    position: relative; overflow: hidden; margin-bottom: 14px;
   }
-  .axis-thumb {
-    position: absolute; top: 50%; width: 18px; height: 18px;
-    background: white; border: 3px solid #a18cd1; border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: left 0.8s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  .share-card-inner { position: relative; z-index: 1; }
+  .share-char { font-size: 60px; margin-bottom: 8px; display: block; }
+  .share-name { font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .share-sub { font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 14px; }
+  .share-tags { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .share-tag { background: rgba(255,255,255,0.25); border-radius: 50px; padding: 4px 12px; font-size: 12px; color: white; }
+  .share-btn {
+    width: 100%; border: none; border-radius: 50px; padding: 14px;
+    font-size: 14px; font-weight: 700; cursor: pointer; margin-bottom: 10px;
+    transition: transform 0.2s, opacity 0.2s;
   }
+  .share-btn:hover { transform: translateY(-1px); opacity: 0.9; }
+  .share-btn-copy { background: #1a1a1a; color: white; }
+  .share-btn-twitter { background: #1DA1F2; color: white; }
+  .copy-toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: #1a1a1a; color: white; border-radius: 50px;
+    padding: 10px 24px; font-size: 13px; font-weight: 600;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999;
+  }
+  .copy-toast.show { opacity: 1; }
 
   .retry-btn {
     background: #1a1a1a; color: white; border: none;
-    border-radius: 50px; padding: 14px 40px;
-    font-size: 15px; font-weight: 600; cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    border-radius: 50px; padding: 14px 40px; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
     margin-top: 8px; margin-bottom: 32px;
   }
   .retry-btn:hover { background: #333; transform: translateY(-1px); }
 
   .flash { position: fixed; inset: 0; pointer-events: none; z-index: 99; opacity: 0; transition: opacity 0.2s; }
 
-  @keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes slideUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);} }
+  @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);} }
+  .char-avatar { animation: float 3s ease-in-out infinite; }
 </style>
 </head>
 <body>
@@ -360,9 +260,7 @@
   </div>
 
   <div id="quiz-screen">
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
-    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
     <div class="q-counter" id="q-counter"></div>
     <div class="q-phase" id="q-phase"></div>
     <div class="q-text" id="q-text"></div>
@@ -371,724 +269,591 @@
   </div>
 
   <div id="result-screen">
-    <div class="result-badge" id="result-badge"></div>
-    <div class="result-type" id="result-type"></div>
-    <div class="result-name" id="result-name"></div>
-    <div class="result-tagline" id="result-tagline"></div>
+    <!-- Character Card -->
+    <div class="char-card" id="char-card">
+      <div class="char-card-bg" id="char-card-bg"></div>
+      <span class="char-avatar" id="char-avatar"></span>
+      <div class="char-name" id="char-name"></div>
+      <div class="char-title" id="char-title"></div>
+      <div class="char-tagline" id="char-tagline"></div>
+      <span class="char-type-badge" id="char-type-badge"></span>
+    </div>
 
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab('color')">カラー</button>
       <button class="tab-btn" onclick="switchTab('persona')">性格</button>
-      <button class="tab-btn" onclick="switchTab('score')">スコア</button>
+      <button class="tab-btn" onclick="switchTab('fortune')">占い</button>
+      <button class="tab-btn" onclick="switchTab('share')">シェア</button>
     </div>
 
     <div class="tab-content active" id="tab-color"></div>
     <div class="tab-content" id="tab-persona"></div>
-    <div class="tab-content" id="tab-score"></div>
+    <div class="tab-content" id="tab-fortune"></div>
+    <div class="tab-content" id="tab-share"></div>
 
     <button class="retry-btn" onclick="resetQuiz()">もう一度診断する</button>
   </div>
 
 </div>
 <div class="flash" id="flash"></div>
+<div class="copy-toast" id="copy-toast">コピーしました！</div>
 
 <script>
-// =====================
-// QUESTIONS
-// type: "color" | "persona"
-// persona questions score on axes: E(外向)/I(内向), S(感覚)/N(直感)
-// =====================
 const questions = [
-  // --- COLOR (8問) ---
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "どちらの色合いに惹かれますか？",
-    type: "color",
-    options: [
-      { label: "明るく温かい", gradient: "linear-gradient(135deg,#FFD580,#FF9966)", scores: { spring:3,summer:0,autumn:0,winter:0 } },
-      { label: "澄んで涼しい", gradient: "linear-gradient(135deg,#89CFF0,#B0E0E6)", scores: { spring:0,summer:3,autumn:0,winter:0 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "どちらのピンクが好き？",
-    type: "color",
-    options: [
-      { label: "コーラル・サーモン", gradient: "linear-gradient(135deg,#FF7F7F,#FFB3A7)", scores: { spring:3,summer:1,autumn:0,winter:0 } },
-      { label: "ローズ・ホットピンク", gradient: "linear-gradient(135deg,#FF69B4,#C71585)", scores: { spring:0,summer:1,autumn:0,winter:3 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "グリーン、どちらが好き？",
-    type: "color",
-    options: [
-      { label: "黄緑・若草色", gradient: "linear-gradient(135deg,#ADFF2F,#9ACD32)", scores: { spring:3,summer:0,autumn:1,winter:0 } },
-      { label: "深い森の緑", gradient: "linear-gradient(135deg,#2D4A2D,#3D6B3D)", scores: { spring:0,summer:0,autumn:2,winter:2 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "どちらの青が好き？",
-    type: "color",
-    options: [
-      { label: "ベビーブルー", gradient: "linear-gradient(135deg,#ADD8E6,#87CEEB)", scores: { spring:1,summer:3,autumn:0,winter:0 } },
-      { label: "ロイヤルブルー", gradient: "linear-gradient(135deg,#1E3A8A,#3B5FD4)", scores: { spring:0,summer:1,autumn:0,winter:3 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "ニュートラルカラー、どちらが好き？",
-    type: "color",
-    options: [
-      { label: "ベージュ・キャメル", gradient: "linear-gradient(135deg,#F5DEB3,#C19A6B)", scores: { spring:2,summer:0,autumn:3,winter:0 } },
-      { label: "グレー・ラベンダー", gradient: "linear-gradient(135deg,#D8D8D8,#C4A4C4)", scores: { spring:0,summer:3,autumn:0,winter:1 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "どちらの黄色が好き？",
-    type: "color",
-    options: [
-      { label: "明るいレモンイエロー", gradient: "linear-gradient(135deg,#FFF44F,#FFE135)", scores: { spring:2,summer:1,autumn:0,winter:1 } },
-      { label: "深みのあるマスタード", gradient: "linear-gradient(135deg,#E3A020,#A07010)", scores: { spring:0,summer:0,autumn:3,winter:0 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "どちらの夕暮れが好き？",
-    type: "color",
-    options: [
-      { label: "パステルグラデ", gradient: "linear-gradient(135deg,#FFD1DC,#FFB347,#87CEEB)", scores: { spring:2,summer:2,autumn:0,winter:0 } },
-      { label: "鮮やかなオレンジ", gradient: "linear-gradient(135deg,#FF6B35,#C0392B)", scores: { spring:1,summer:0,autumn:3,winter:1 } },
-    ]
-  },
-  {
-    phase: "COLOR", phaseColor: "#a18cd1",
-    text: "どちらの紫が好き？",
-    type: "color",
-    options: [
-      { label: "ライラック・薄紫", gradient: "linear-gradient(135deg,#C4A4D4,#B8A4C8)", scores: { spring:1,summer:3,autumn:0,winter:1 } },
-      { label: "ディープパープル", gradient: "linear-gradient(135deg,#4B0082,#6A0DAD)", scores: { spring:0,summer:0,autumn:1,winter:3 } },
-    ]
-  },
-
-  // --- PERSONA (8問) ---
-  // axes: E(外向+), I(内向+), S(感覚+), N(直感+)
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "週末の過ごし方、どっちが好き？",
-    type: "persona",
-    options: [
-      { label: "友達と出かけたい", sub: "にぎやかな場所・人との時間", scores: { E:2 } },
-      { label: "家でゆっくりしたい", sub: "一人の時間・静かな環境", scores: { I:2 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "新しい趣味を始めるとき、どっち？",
-    type: "persona",
-    options: [
-      { label: "まずやってみる", sub: "体験しながら覚えるタイプ", scores: { S:2, E:1 } },
-      { label: "調べてから始める", sub: "全体像を把握してから動くタイプ", scores: { N:2, I:1 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "友達の悩みを聞いたとき、自然にやってしまうのは？",
-    type: "persona",
-    options: [
-      { label: "解決策を一緒に考える", sub: "具体的なアドバイスをしたくなる", scores: { S:2 } },
-      { label: "とにかく共感する", sub: "気持ちに寄り添うことを大切にする", scores: { N:1, I:1 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "旅行の計画、どっちがテンションあがる？",
-    type: "persona",
-    options: [
-      { label: "びっしりスケジュールを組む", sub: "事前準備が楽しみの一部", scores: { S:2 } },
-      { label: "行き当たりばったりが好き", sub: "その場の流れで動くほうが楽しい", scores: { N:2, E:1 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "元気がないとき、回復する方法は？",
-    type: "persona",
-    options: [
-      { label: "誰かと話してスッキリする", sub: "外に出て気分転換したい", scores: { E:2 } },
-      { label: "一人で考えて整理する", sub: "静かに内側を見つめたい", scores: { I:2 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "何かを決めるとき、重視するのは？",
-    type: "persona",
-    options: [
-      { label: "データや実績", sub: "確実な根拠があると安心できる", scores: { S:2 } },
-      { label: "直感やひらめき", sub: "なんとなくの感覚を大切にする", scores: { N:2 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "グループの中での自分は？",
-    type: "persona",
-    options: [
-      { label: "自然とリードしてしまう", sub: "話を引っ張るのが苦じゃない", scores: { E:2 } },
-      { label: "サポート役になりがち", sub: "陰で支えるほうが向いてる", scores: { I:2 } },
-    ]
-  },
-  {
-    phase: "性格", phaseColor: "#f6a0b0",
-    text: "理想のライフスタイルに近いのは？",
-    type: "persona",
-    options: [
-      { label: "安定・ルーティン重視", sub: "毎日同じリズムが心地いい", scores: { S:2 } },
-      { label: "変化・刺激重視", sub: "新しいことに挑戦し続けたい", scores: { N:2, E:1 } },
-    ]
-  },
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"どちらの色合いに惹かれますか？", type:"color",
+    options:[
+      {label:"明るく温かい", gradient:"linear-gradient(135deg,#FFD580,#FF9966)", scores:{spring:3,summer:0,autumn:0,winter:0}},
+      {label:"澄んで涼しい", gradient:"linear-gradient(135deg,#89CFF0,#B0E0E6)", scores:{spring:0,summer:3,autumn:0,winter:0}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"どちらのピンクが好き？", type:"color",
+    options:[
+      {label:"コーラル・サーモン", gradient:"linear-gradient(135deg,#FF7F7F,#FFB3A7)", scores:{spring:3,summer:1,autumn:0,winter:0}},
+      {label:"ローズ・ホットピンク", gradient:"linear-gradient(135deg,#FF69B4,#C71585)", scores:{spring:0,summer:1,autumn:0,winter:3}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"グリーン、どちらが好き？", type:"color",
+    options:[
+      {label:"黄緑・若草色", gradient:"linear-gradient(135deg,#ADFF2F,#9ACD32)", scores:{spring:3,summer:0,autumn:1,winter:0}},
+      {label:"深い森の緑", gradient:"linear-gradient(135deg,#2D4A2D,#3D6B3D)", scores:{spring:0,summer:0,autumn:2,winter:2}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"どちらの青が好き？", type:"color",
+    options:[
+      {label:"ベビーブルー", gradient:"linear-gradient(135deg,#ADD8E6,#87CEEB)", scores:{spring:1,summer:3,autumn:0,winter:0}},
+      {label:"ロイヤルブルー", gradient:"linear-gradient(135deg,#1E3A8A,#3B5FD4)", scores:{spring:0,summer:1,autumn:0,winter:3}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"ニュートラルカラー、どちらが好き？", type:"color",
+    options:[
+      {label:"ベージュ・キャメル", gradient:"linear-gradient(135deg,#F5DEB3,#C19A6B)", scores:{spring:2,summer:0,autumn:3,winter:0}},
+      {label:"グレー・ラベンダー", gradient:"linear-gradient(135deg,#D8D8D8,#C4A4C4)", scores:{spring:0,summer:3,autumn:0,winter:1}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"どちらの黄色が好き？", type:"color",
+    options:[
+      {label:"明るいレモンイエロー", gradient:"linear-gradient(135deg,#FFF44F,#FFE135)", scores:{spring:2,summer:1,autumn:0,winter:1}},
+      {label:"深みのあるマスタード", gradient:"linear-gradient(135deg,#E3A020,#A07010)", scores:{spring:0,summer:0,autumn:3,winter:0}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"どちらの夕暮れが好き？", type:"color",
+    options:[
+      {label:"パステルグラデ", gradient:"linear-gradient(135deg,#FFD1DC,#FFB347,#87CEEB)", scores:{spring:2,summer:2,autumn:0,winter:0}},
+      {label:"鮮やかなオレンジ", gradient:"linear-gradient(135deg,#FF6B35,#C0392B)", scores:{spring:1,summer:0,autumn:3,winter:1}},
+    ]},
+  { phase:"COLOR", phaseColor:"#a18cd1", text:"どちらの紫が好き？", type:"color",
+    options:[
+      {label:"ライラック・薄紫", gradient:"linear-gradient(135deg,#C4A4D4,#B8A4C8)", scores:{spring:1,summer:3,autumn:0,winter:1}},
+      {label:"ディープパープル", gradient:"linear-gradient(135deg,#4B0082,#6A0DAD)", scores:{spring:0,summer:0,autumn:1,winter:3}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"週末の過ごし方、どっちが好き？", type:"persona",
+    options:[
+      {label:"友達と出かけたい", sub:"にぎやかな場所・人との時間", scores:{E:2}},
+      {label:"家でゆっくりしたい", sub:"一人の時間・静かな環境", scores:{I:2}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"新しい趣味を始めるとき、どっち？", type:"persona",
+    options:[
+      {label:"まずやってみる", sub:"体験しながら覚えるタイプ", scores:{S:2,E:1}},
+      {label:"調べてから始める", sub:"全体像を把握してから動くタイプ", scores:{N:2,I:1}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"友達の悩みを聞いたとき、自然にやってしまうのは？", type:"persona",
+    options:[
+      {label:"解決策を一緒に考える", sub:"具体的なアドバイスをしたくなる", scores:{S:2}},
+      {label:"とにかく共感する", sub:"気持ちに寄り添うことを大切にする", scores:{N:1,I:1}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"旅行の計画、どっちがテンションあがる？", type:"persona",
+    options:[
+      {label:"びっしりスケジュールを組む", sub:"事前準備が楽しみの一部", scores:{S:2}},
+      {label:"行き当たりばったりが好き", sub:"その場の流れで動くほうが楽しい", scores:{N:2,E:1}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"元気がないとき、回復する方法は？", type:"persona",
+    options:[
+      {label:"誰かと話してスッキリする", sub:"外に出て気分転換したい", scores:{E:2}},
+      {label:"一人で考えて整理する", sub:"静かに内側を見つめたい", scores:{I:2}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"何かを決めるとき、重視するのは？", type:"persona",
+    options:[
+      {label:"データや実績", sub:"確実な根拠があると安心できる", scores:{S:2}},
+      {label:"直感やひらめき", sub:"なんとなくの感覚を大切にする", scores:{N:2}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"グループの中での自分は？", type:"persona",
+    options:[
+      {label:"自然とリードしてしまう", sub:"話を引っ張るのが苦じゃない", scores:{E:2}},
+      {label:"サポート役になりがち", sub:"陰で支えるほうが向いてる", scores:{I:2}},
+    ]},
+  { phase:"性格", phaseColor:"#f6a0b0", text:"理想のライフスタイルに近いのは？", type:"persona",
+    options:[
+      {label:"安定・ルーティン重視", sub:"毎日同じリズムが心地いい", scores:{S:2}},
+      {label:"変化・刺激重視", sub:"新しいことに挑戦し続けたい", scores:{N:2,E:1}},
+    ]},
 ];
 
-// =====================
-// PERSONALITY TYPES (8タイプ)
-// season × axis(E/I + S/N) → 4season × 2 = 8
-// =====================
+// ===== PERSONALITY TYPES =====
 const personalityTypes = {
   spring_ES: {
-    name: "サニーリーダー",
-    tagline: "太陽みたいな存在感と行動力",
-    emoji: "☀️",
-    color: "#FF9966",
-    badge: "linear-gradient(135deg,#FFD580,#FF9966)",
-    season: "spring",
-    traits: ["フレッシュ","積極的","社交的","実行力"],
-    desc: "明るさと行動力を兼ね備えた、場の中心にいるタイプ。新しいことに即飛び込む勇気があり、みんなを自然と引っ張っていく。感覚的に物事を判断するのが得意で、考えすぎずに動けるのが強み。",
-    strength: "場を盛り上げる力・即断即決",
-    weakness: "じっくり考えるより先に動いてしまうことも",
-    compat: [
-      { emoji: "🌿", name: "サマーエンパス", desc: "感情をうまく言語化してくれる" },
-      { emoji: "🍂", name: "オータムクラフター", desc: "細部を補い合える相棒" },
-    ]
+    name:"サニーリーダー", tagline:"太陽みたいな存在感と行動力",
+    charName:"ソル", charAvatar:"🌞", charDesc:"いつも場の中心にいる太陽の化身",
+    badge:"linear-gradient(135deg,#FFD580,#FF9966)", season:"spring",
+    traits:["フレッシュ","積極的","社交的","実行力"],
+    desc:"明るさと行動力を兼ね備えた、場の中心にいるタイプ。新しいことに即飛び込む勇気があり、みんなを自然と引っ張っていく。",
+    strength:"場を盛り上げる力・即断即決",
+    weakness:"じっくり考えるより先に動いてしまうことも",
+    compat:[{emoji:"🌿",name:"サマーエンパス",desc:"感情をうまく言語化してくれる"},{emoji:"🍂",name:"オータムクラフター",desc:"細部を補い合える相棒"}],
+    fortune:{
+      message:"あなたの輝きは周りの人のエネルギーになっている。自分を信じて一歩踏み出した先に、新しい扉が開く時期。",
+      lucky:{items:["オレンジのアクセサリー","ひまわり","柑橘系の香り"],action:"朝日を浴びながら深呼吸する。新しい場所に足を運ぶ。"},
+      caution:"焦りすぎて周りが見えなくなること。立ち止まって人の声に耳を傾けて。",
+      item:"🌸", lifeAdvice:"明るい色のインテリアを取り入れると運気が上がる。特に黄色・オレンジが吉。"
+    }
   },
   spring_EN: {
-    name: "ドリームスパーク",
-    tagline: "アイデアとワクワクが止まらない",
-    emoji: "✨",
-    color: "#FFB347",
-    badge: "linear-gradient(135deg,#FFE135,#FFB347)",
-    season: "spring",
-    traits: ["クリエイティブ","楽観的","直感型","エネルギッシュ"],
-    desc: "次から次へとアイデアが浮かんで、周りを巻き込んでいくタイプ。直感と行動力のコンボが強力で、「なんか面白そう！」という感覚でどんどん新しいことを始める。場の空気を変える力がある。",
-    strength: "発想力・熱量で人を動かす力",
-    weakness: "最後までやり切るのが苦手なことも",
-    compat: [
-      { emoji: "❄️", name: "ウィンタービジョナリー", desc: "ビジョンを整理してくれる" },
-      { emoji: "🍂", name: "オータムアナリスト", desc: "実行に落とし込む力を補う" },
-    ]
+    name:"ドリームスパーク", tagline:"アイデアとワクワクが止まらない",
+    charName:"スパーク", charAvatar:"✨", charDesc:"夢と現実の架け橋になる光の精",
+    badge:"linear-gradient(135deg,#FFE135,#FFB347)", season:"spring",
+    traits:["クリエイティブ","楽観的","直感型","エネルギッシュ"],
+    desc:"次から次へとアイデアが浮かんで、周りを巻き込んでいくタイプ。直感と行動力のコンボが強力で、場の空気を変える力がある。",
+    strength:"発想力・熱量で人を動かす力",
+    weakness:"最後までやり切るのが苦手なことも",
+    compat:[{emoji:"❄️",name:"ウィンタービジョナリー",desc:"ビジョンを整理してくれる"},{emoji:"🍂",name:"オータムアナリスト",desc:"実行に落とし込む力を補う"}],
+    fortune:{
+      message:"あなたのひらめきは宇宙からのメッセージ。今こそそのアイデアをメモに書き留めて。小さな行動が大きな奇跡を生む。",
+      lucky:{items:["星型のアクセサリー","黄色いノート","ミントの香り"],action:"思いついたことをすぐにメモする習慣をつける。新しい人と会う機会を積極的に作る。"},
+      caution:"飽きっぽさに注意。一つのことを最後までやり遂げると大きな成果が生まれる。",
+      item:"🌟", lifeAdvice:"デスクに花を飾ると創造力が高まる。春の花・黄色い花が特に効果的。"
+    }
   },
   spring_IS: {
-    name: "サンシャインクラフター",
-    tagline: "細やかな感性と温かいぬくもり",
-    emoji: "🌼",
-    color: "#FFCA58",
-    badge: "linear-gradient(135deg,#FFE580,#FFCA58)",
-    season: "spring",
-    traits: ["丁寧","温かい","感覚的","細やか"],
-    desc: "一人でコツコツと丁寧に物事に向き合うタイプ。細部への感性が鋭く、「かわいい」「好き」という感覚を大切にする。人に対してもさりげない気遣いができ、周りを温かく包む存在。",
-    strength: "細部へのこだわり・温かい人間関係",
-    weakness: "一人で抱え込みやすいことも",
-    compat: [
-      { emoji: "☀️", name: "サニーリーダー", desc: "外へ引っ張り出してくれる" },
-      { emoji: "🌿", name: "サマーエンパス", desc: "感情を深くわかり合える" },
-    ]
+    name:"サンシャインクラフター", tagline:"細やかな感性と温かいぬくもり",
+    charName:"ルミ", charAvatar:"🌼", charDesc:"小さな幸せを見つけるのが得意な光の妖精",
+    badge:"linear-gradient(135deg,#FFE580,#FFCA58)", season:"spring",
+    traits:["丁寧","温かい","感覚的","細やか"],
+    desc:"一人でコツコツと丁寧に物事に向き合うタイプ。細部への感性が鋭く、周りを温かく包む存在。",
+    strength:"細部へのこだわり・温かい人間関係",
+    weakness:"一人で抱え込みやすいことも",
+    compat:[{emoji:"☀️",name:"サニーリーダー",desc:"外へ引っ張り出してくれる"},{emoji:"🌿",name:"サマーエンパス",desc:"感情を深くわかり合える"}],
+    fortune:{
+      message:"あなたの丁寧さと優しさが、大切な人の心に深く刻まれている。焦らなくていい。あなたのペースが一番美しい。",
+      lucky:{items:["ハーブティー","ハンドクリーム","小花柄のもの"],action:"毎朝5分、自分の好きなことだけをする時間を作る。手作りのものを誰かにプレゼントする。"},
+      caution:"自己犠牲になりがち。「No」と言うことも時には大切な優しさ。",
+      item:"🌸", lifeAdvice:"キッチンにハーブを育てると毎日の幸福感がアップ。バジルやミントがおすすめ。"
+    }
   },
   spring_IN: {
-    name: "ポエティックドリーマー",
-    tagline: "内側に広がる豊かな世界観",
-    emoji: "🌈",
-    color: "#FFD580",
-    badge: "linear-gradient(135deg,#FFD580,#FFA07A)",
-    season: "spring",
-    traits: ["感受性豊か","独創的","内向的","夢想家"],
-    desc: "豊かな内的世界を持ち、独自の視点で物事を見るタイプ。日常のちょっとした瞬間に美しさを見つける感受性がある。一人の時間が創造性の源で、じっくり考えてから動くことが多い。",
-    strength: "独創的な視点・深い感受性",
-    weakness: "自分の世界に入りすぎることも",
-    compat: [
-      { emoji: "✨", name: "ドリームスパーク", desc: "世界を一緒に広げてくれる" },
-      { emoji: "🌿", name: "サマーリフレクター", desc: "内面を丁寧に聞いてくれる" },
-    ]
+    name:"ポエティックドリーマー", tagline:"内側に広がる豊かな世界観",
+    charName:"オーロラ", charAvatar:"🌈", charDesc:"言葉にならない美しさを感じ取る感性の詩人",
+    badge:"linear-gradient(135deg,#FFD580,#FFA07A)", season:"spring",
+    traits:["感受性豊か","独創的","内向的","夢想家"],
+    desc:"豊かな内的世界を持ち、独自の視点で物事を見るタイプ。日常のちょっとした瞬間に美しさを見つける感受性がある。",
+    strength:"独創的な視点・深い感受性",
+    weakness:"自分の世界に入りすぎることも",
+    compat:[{emoji:"✨",name:"ドリームスパーク",desc:"世界を一緒に広げてくれる"},{emoji:"🌿",name:"サマーリフレクター",desc:"内面を丁寧に聞いてくれる"}],
+    fortune:{
+      message:"あなたの感性は特別な才能。誰も見ていない場所に宝石を見つける力がある。その感覚を信じて表現してみて。",
+      lucky:{items:["日記・スケッチブック","虹色のもの","雨の日の散歩"],action:"感じたことを言葉や絵にする。美術館や自然の中でひとり過ごす時間を大切に。"},
+      caution:"現実から離れすぎると人との距離が開いてしまう。定期的に誰かと話す機会を作って。",
+      item:"🌙", lifeAdvice:"窓辺に虹色のクリスタルを置くと感性が磨かれる。朝の光が当たる場所がベスト。"
+    }
   },
   summer_ES: {
-    name: "サマーエンパス",
-    tagline: "みんなの気持ちをくみとるムードメーカー",
-    emoji: "🌿",
-    color: "#9BBBD4",
-    badge: "linear-gradient(135deg,#B0E0E6,#9BBBD4)",
-    season: "summer",
-    traits: ["共感力","社交的","調和重視","安定感"],
-    desc: "場の空気を読む能力が高く、誰とでも自然と溶け込めるタイプ。人の感情に敏感で、グループの調和を保つことが得意。社交的でありながら思いやりがあり、みんなの「よりどころ」になる存在。",
-    strength: "共感力・場の調和を保つ力",
-    weakness: "自分の意見を後回しにしてしまうことも",
-    compat: [
-      { emoji: "☀️", name: "サニーリーダー", desc: "エネルギーをもらえる相手" },
-      { emoji: "❄️", name: "ウィンタービジョナリー", desc: "頭を整理してくれる" },
-    ]
+    name:"サマーエンパス", tagline:"みんなの気持ちをくみとるムードメーカー",
+    charName:"リリィ", charAvatar:"🌿", charDesc:"場の空気を読んで和らげる風の精霊",
+    badge:"linear-gradient(135deg,#B0E0E6,#9BBBD4)", season:"summer",
+    traits:["共感力","社交的","調和重視","安定感"],
+    desc:"場の空気を読む能力が高く、誰とでも自然と溶け込めるタイプ。人の感情に敏感で、グループの調和を保つことが得意。",
+    strength:"共感力・場の調和を保つ力",
+    weakness:"自分の意見を後回しにしてしまうことも",
+    compat:[{emoji:"☀️",name:"サニーリーダー",desc:"エネルギーをもらえる相手"},{emoji:"❄️",name:"ウィンタービジョナリー",desc:"頭を整理してくれる"}],
+    fortune:{
+      message:"あなたの共感力は世界をつなぐ糸。今あなたの周りにいる人は、あなたに出会えたことを幸運だと思っている。",
+      lucky:{items:["青色・水色のアイテム","ラベンダーの香り","丸いもの"],action:"自分の気持ちを正直に一人に伝えてみる。水辺に行くと心がリフレッシュされる。"},
+      caution:"他人の感情を吸収しすぎて疲れることがある。自分の感情との境界線を意識して。",
+      item:"💙", lifeAdvice:"青色・水色のインテリアが心を落ち着かせる。特に寝室に取り入れると睡眠の質が上がる。"
+    }
   },
   summer_EN: {
-    name: "ルミナスコネクター",
-    tagline: "人と人、アイデアをつなぐ橋渡し役",
-    emoji: "💫",
-    color: "#C4A4D4",
-    badge: "linear-gradient(135deg,#C4A4D4,#9BBBD4)",
-    season: "summer",
-    traits: ["直感的","コミュニケーター","柔軟","インスピレーション"],
-    desc: "人と人をつなぐのが得意で、どんな場所にも自然に入っていけるタイプ。直感で物事の可能性を感じ取り、会話の中で新しいアイデアが生まれる。変化を楽しみ、多様な人間関係が刺激になる。",
-    strength: "ネットワーク力・場のインスピレーション",
-    weakness: "広く浅くなりがちなことも",
-    compat: [
-      { emoji: "🍂", name: "オータムクラフター", desc: "深く掘り下げる力を補う" },
-      { emoji: "🌼", name: "サンシャインクラフター", desc: "丁寧さを学べる相手" },
-    ]
+    name:"ルミナスコネクター", tagline:"人と人、アイデアをつなぐ橋渡し役",
+    charName:"アリア", charAvatar:"💫", charDesc:"異なる世界をつなぐ光の橋渡し人",
+    badge:"linear-gradient(135deg,#C4A4D4,#9BBBD4)", season:"summer",
+    traits:["直感的","コミュニケーター","柔軟","インスピレーション"],
+    desc:"人と人をつなぐのが得意で、どんな場所にも自然に入っていけるタイプ。変化を楽しみ、多様な人間関係が刺激になる。",
+    strength:"ネットワーク力・場のインスピレーション",
+    weakness:"広く浅くなりがちなことも",
+    compat:[{emoji:"🍂",name:"オータムクラフター",desc:"深く掘り下げる力を補う"},{emoji:"🌼",name:"サンシャインクラフター",desc:"丁寧さを学べる相手"}],
+    fortune:{
+      message:"あなたが架ける橋の上を、たくさんの奇跡が歩いていく。あなたのひと声が誰かの人生を変えているかもしれない。",
+      lucky:{items:["パープル系アクセサリー","音楽","カフェのノイズ"],action:"異分野の人とランチを食べる。SNSで感謝を伝える投稿をする。"},
+      caution:"関係が広がりすぎて中心を見失うことも。本当に大切な人との時間を優先して。",
+      item:"🔮", lifeAdvice:"玄関に鏡を置くと縁を呼び込む。パープル系の小物を加えると運気アップ。"
+    }
   },
   summer_IS: {
-    name: "サマーリフレクター",
-    tagline: "静かな深さと繊細な観察眼",
-    emoji: "🪞",
-    color: "#B8A4C8",
-    badge: "linear-gradient(135deg,#D8BFD8,#B8A4C8)",
-    season: "summer",
-    traits: ["観察力","内省的","丁寧","安心感"],
-    desc: "じっくり観察して確かな情報で動くタイプ。静かな存在感があり、細かいところまで気を配れる。一人の時間で充電し、信頼できる少人数との深い関係を好む。安定感があり、周りから頼りにされる。",
-    strength: "観察力・信頼関係の深め方",
-    weakness: "新しい環境へのなじみに時間がかかることも",
-    compat: [
-      { emoji: "✨", name: "ドリームスパーク", desc: "新しい世界に連れ出してくれる" },
-      { emoji: "❄️", name: "ウィンタービジョナリー", desc: "大きな視点を共有できる" },
-    ]
+    name:"サマーリフレクター", tagline:"静かな深さと繊細な観察眼",
+    charName:"ミスト", charAvatar:"🪞", charDesc:"水面のように静かに全てを映し出す存在",
+    badge:"linear-gradient(135deg,#D8BFD8,#B8A4C8)", season:"summer",
+    traits:["観察力","内省的","丁寧","安心感"],
+    desc:"じっくり観察して確かな情報で動くタイプ。静かな存在感があり、信頼できる少人数との深い関係を好む。",
+    strength:"観察力・信頼関係の深め方",
+    weakness:"新しい環境へのなじみに時間がかかることも",
+    compat:[{emoji:"✨",name:"ドリームスパーク",desc:"新しい世界に連れ出してくれる"},{emoji:"❄️",name:"ウィンタービジョナリー",desc:"大きな視点を共有できる"}],
+    fortune:{
+      message:"あなたの静けさの中に、誰も気づかない答えがある。今は焦らず、内なる声に耳を傾けて。その声が正解を指している。",
+      lucky:{items:["白・シルバーのアイテム","月光浴","静かな音楽"],action:"日記をつける習慣を始める。月を眺めながら一日を振り返る時間を作る。"},
+      caution:"考えすぎて行動が遅れることがある。「70点で動く」という意識が人生を豊かにする。",
+      item:"🌙", lifeAdvice:"寝室に月のモチーフを飾ると直感力が磨かれる。シルバーや白のファブリックが吉。"
+    }
   },
   summer_IN: {
-    name: "ムーンライトティンカー",
-    tagline: "独自の審美眼と深い内面世界",
-    emoji: "🌙",
-    color: "#9B8DB8",
-    badge: "linear-gradient(135deg,#C4A4D4,#7B68A0)",
-    season: "summer",
-    traits: ["芸術的","内向的","独自性","深い思考"],
-    desc: "独自の美意識と深い内面世界を持つタイプ。流行より自分の感性を信じ、じっくり考えることで独創的なアイデアを生み出す。一人で没頭する時間が大切で、言葉より感覚で物事を捉える。",
-    strength: "独自の美意識・深い洞察力",
-    weakness: "人に伝えることが苦手なことも",
-    compat: [
-      { emoji: "💫", name: "ルミナスコネクター", desc: "世界を広げてくれる" },
-      { emoji: "☀️", name: "サニーリーダー", desc: "外の世界に引っ張り出してくれる" },
-    ]
+    name:"ムーンライトティンカー", tagline:"独自の審美眼と深い内面世界",
+    charName:"ルナ", charAvatar:"🌙", charDesc:"月明かりの中でしか咲かない幻の花",
+    badge:"linear-gradient(135deg,#C4A4D4,#7B68A0)", season:"summer",
+    traits:["芸術的","内向的","独自性","深い思考"],
+    desc:"独自の美意識と深い内面世界を持つタイプ。流行より自分の感性を信じ、じっくり考えることで独創的なアイデアを生み出す。",
+    strength:"独自の美意識・深い洞察力",
+    weakness:"人に伝えることが苦手なことも",
+    compat:[{emoji:"💫",name:"ルミナスコネクター",desc:"世界を広げてくれる"},{emoji:"☀️",name:"サニーリーダー",desc:"外の世界に引っ張り出してくれる"}],
+    fortune:{
+      message:"あなたの世界は美しい。その感性を隠さずに表現した時、あなたは誰かの心に永遠に残る存在になる。",
+      lucky:{items:["満月の夜の散歩","インセンス","深い色のもの"],action:"自分だけの創作物を作る。誰かに作品を見せる勇気を持つ。"},
+      caution:"孤立することで才能が埋もれることがある。信頼できる人に自分の世界を見せてみて。",
+      item:"🎨", lifeAdvice:"アトリエコーナーを作ると創造性が花開く。紫・深青のアクセントカラーが創作意欲を高める。"
+    }
   },
   autumn_ES: {
-    name: "アースリーリーダー",
-    tagline: "地に足ついた頼れるムードメーカー",
-    emoji: "🍂",
-    color: "#C0603B",
-    badge: "linear-gradient(135deg,#C19A6B,#C0603B)",
-    season: "autumn",
-    traits: ["実直","リーダーシップ","信頼感","行動力"],
-    desc: "現実的で行動力があり、グループをまとめる力を持つタイプ。コツコツと実績を積み上げ、言葉より行動で示す。周りから「頼れる存在」と思われることが多く、安定した人間関係を築く。",
-    strength: "実行力・安定したリーダーシップ",
-    weakness: "完璧主義になりすぎることも",
-    compat: [
-      { emoji: "✨", name: "ドリームスパーク", desc: "アイデアに刺激をもらえる" },
-      { emoji: "🌿", name: "サマーエンパス", desc: "感情面を補い合える" },
-    ]
+    name:"アースリーリーダー", tagline:"地に足ついた頼れるムードメーカー",
+    charName:"テラ", charAvatar:"🍂", charDesc:"大地のように揺るがない頼れる守護者",
+    badge:"linear-gradient(135deg,#C19A6B,#C0603B)", season:"autumn",
+    traits:["実直","リーダーシップ","信頼感","行動力"],
+    desc:"現実的で行動力があり、グループをまとめる力を持つタイプ。コツコツと実績を積み上げ、言葉より行動で示す。",
+    strength:"実行力・安定したリーダーシップ",
+    weakness:"完璧主義になりすぎることも",
+    compat:[{emoji:"✨",name:"ドリームスパーク",desc:"アイデアに刺激をもらえる"},{emoji:"🌿",name:"サマーエンパス",desc:"感情面を補い合える"}],
+    fortune:{
+      message:"あなたが積み上げてきたものは消えない。今は収穫の季節。種まきしてきた努力が、実を結ぼうとしている。",
+      lucky:{items:["木製の小物","テラコッタ色のもの","ナッツ・豆類"],action:"長期目標を紙に書き出す。自然の中でウォーキングする習慣を持つ。"},
+      caution:"頑固になりすぎると新しいチャンスを見逃す。たまには自分のルールを外してみて。",
+      item:"🌰", lifeAdvice:"木のインテリアや植物を増やすと安定感と運気が高まる。観葉植物が特に効果的。"
+    }
   },
   autumn_EN: {
-    name: "オータムビジョナリー",
-    tagline: "深みある直感で未来を見通す",
-    emoji: "🔮",
-    color: "#8B6914",
-    badge: "linear-gradient(135deg,#C19A6B,#8B6914)",
-    season: "autumn",
-    traits: ["直感的","先見性","独立心","探求心"],
-    desc: "深い直感力と広い視野で物事の本質を見抜くタイプ。表面だけでなく隠れたパターンや可能性に気づく。独立心が強く自分のペースで動くが、いざ動き出すと周りを巻き込む力がある。",
-    strength: "洞察力・長期的な視点",
-    weakness: "現実的な部分を見落とすことも",
-    compat: [
-      { emoji: "🍂", name: "アースリーリーダー", desc: "地に足つけてくれる相手" },
-      { emoji: "❄️", name: "ウィンタービジョナリー", desc: "ビジョンを磨き合える" },
-    ]
+    name:"オータムビジョナリー", tagline:"深みある直感で未来を見通す",
+    charName:"オラクル", charAvatar:"🔮", charDesc:"過去と未来をつなぐ時間の賢者",
+    badge:"linear-gradient(135deg,#C19A6B,#8B6914)", season:"autumn",
+    traits:["直感的","先見性","独立心","探求心"],
+    desc:"深い直感力と広い視野で物事の本質を見抜くタイプ。独立心が強く自分のペースで動くが、いざ動き出すと周りを巻き込む力がある。",
+    strength:"洞察力・長期的な視点",
+    weakness:"現実的な部分を見落とすことも",
+    compat:[{emoji:"🍂",name:"アースリーリーダー",desc:"地に足つけてくれる相手"},{emoji:"❄️",name:"ウィンタービジョナリー",desc:"ビジョンを磨き合える"}],
+    fortune:{
+      message:"あなたの直感は時代の数歩先を行っている。信じてほしい、今感じていることは正しい。動き出す時が来た。",
+      lucky:{items:["地図・コンパス","アンティークなもの","スパイスの香り"],action:"長い間温めてきたアイデアを誰かに話してみる。過去の成功体験を振り返る。"},
+      caution:"先を見すぎて現在を楽しめないことがある。今この瞬間にも価値があることを忘れずに。",
+      item:"🌿", lifeAdvice:"書斎やワークスペースにこだわると仕事運が上がる。地図や本棚が運気を呼ぶ。"
+    }
   },
   autumn_IS: {
-    name: "オータムクラフター",
-    tagline: "職人気質の静かな完成主義者",
-    emoji: "🛠️",
-    color: "#A0522D",
-    badge: "linear-gradient(135deg,#DEB887,#A0522D)",
-    season: "autumn",
-    traits: ["職人気質","完成主義","内省的","丁寧"],
-    desc: "一つのことを深く追求し、完成度にこだわるタイプ。静かだが芯がしっかりしていて、じっくり考えてから確かな行動を取る。細部への気配りが突出しており、手がけたものには高い品質が宿る。",
-    strength: "専門性・細部への徹底したこだわり",
-    weakness: "完成まで時間がかかることも",
-    compat: [
-      { emoji: "☀️", name: "サニーリーダー", desc: "テンポよく進める力をくれる" },
-      { emoji: "💫", name: "ルミナスコネクター", desc: "外の世界とつなげてくれる" },
-    ]
+    name:"オータムクラフター", tagline:"職人気質の静かな完成主義者",
+    charName:"クラフト", charAvatar:"🛠️", charDesc:"一つ一つに魂を込める孤高の職人",
+    badge:"linear-gradient(135deg,#DEB887,#A0522D)", season:"autumn",
+    traits:["職人気質","完成主義","内省的","丁寧"],
+    desc:"一つのことを深く追求し、完成度にこだわるタイプ。静かだが芯がしっかりしていて、手がけたものには高い品質が宿る。",
+    strength:"専門性・細部への徹底したこだわり",
+    weakness:"完成まで時間がかかることも",
+    compat:[{emoji:"☀️",name:"サニーリーダー",desc:"テンポよく進める力をくれる"},{emoji:"💫",name:"ルミナスコネクター",desc:"外の世界とつなげてくれる"}],
+    fortune:{
+      message:"あなたが作るものには魂が宿っている。急がなくていい。本物は時間をかけて生まれる。あなたの手から傑作が生まれようとしている。",
+      lucky:{items:["良質な道具・文具","陶器・手作り品","シナモンの香り"],action:"長年やってみたかった手作りを始める。一つのスキルを極める挑戦をする。"},
+      caution:"完璧を求めすぎてスタートを切れないことがある。80点で世に出す勇気も才能のうち。",
+      item:"🍁", lifeAdvice:"手仕事のできるスペースを作ると運が向く。ブラウン・テラコッタのインテリアが集中力を高める。"
+    }
   },
   autumn_IN: {
-    name: "オータムアナリスト",
-    tagline: "深く考え、静かに確信する",
-    emoji: "📐",
-    color: "#6B4226",
-    badge: "linear-gradient(135deg,#C19A6B,#6B4226)",
-    season: "autumn",
-    traits: ["分析的","独立思考","内向的","論理的"],
-    desc: "深い思考と分析力を持ち、自分の内側で物事を丁寧に整理するタイプ。じっくり考えて出した答えへの確信が強く、独自の世界観を持つ。静かでも、的確な言葉で人を動かす力がある。",
-    strength: "深い分析力・揺るがない信念",
-    weakness: "人に伝えるまでに時間がかかることも",
-    compat: [
-      { emoji: "✨", name: "ドリームスパーク", desc: "思考を外に出す勇気をくれる" },
-      { emoji: "🌿", name: "サマーエンパス", desc: "人の温かさに触れられる" },
-    ]
+    name:"オータムアナリスト", tagline:"深く考え、静かに確信する",
+    charName:"セージ", charAvatar:"📐", charDesc:"論理と直感を統合する孤高の賢者",
+    badge:"linear-gradient(135deg,#C19A6B,#6B4226)", season:"autumn",
+    traits:["分析的","独立思考","内向的","論理的"],
+    desc:"深い思考と分析力を持ち、自分の内側で物事を丁寧に整理するタイプ。じっくり考えて出した答えへの確信が強く、的確な言葉で人を動かす力がある。",
+    strength:"深い分析力・揺るがない信念",
+    weakness:"人に伝えるまでに時間がかかることも",
+    compat:[{emoji:"✨",name:"ドリームスパーク",desc:"思考を外に出す勇気をくれる"},{emoji:"🌿",name:"サマーエンパス",desc:"人の温かさに触れられる"}],
+    fortune:{
+      message:"あなたの頭の中にある答えは、世界が必要としているもの。その知恵を胸の中だけにとどめておくのはもったいない。",
+      lucky:{items:["良書・専門書","コーヒーやお茶","静かな場所"],action:"考えをブログや日記にまとめてみる。信頼できる人に自分の分析を話してみる。"},
+      caution:"一人で考えすぎて視野が狭まることがある。異なる意見を積極的に取り入れて。",
+      item:"🌰", lifeAdvice:"書斎・勉強スペースを整えると思考力が上がる。茶色・緑の落ち着いた色合いが集中力を高める。"
+    }
   },
   winter_ES: {
-    name: "アイスブレイカー",
-    tagline: "鋭いセンスと圧倒的な存在感",
-    emoji: "⚡",
-    color: "#3B5FD4",
-    badge: "linear-gradient(135deg,#3B5FD4,#1E3A8A)",
-    season: "winter",
-    traits: ["カリスマ","行動力","鋭い","社交的"],
-    desc: "圧倒的な存在感と鋭いセンスで場を支配するタイプ。物怖じせず自分の意見をはっきり言え、トレンドより本物の価値を見抜く目がある。スピードと決断力があり、場を引き締める力を持つ。",
-    strength: "カリスマ性・瞬時の判断力",
-    weakness: "周りへのペース合わせが苦手なことも",
-    compat: [
-      { emoji: "🌿", name: "サマーエンパス", desc: "感情面を補い合える" },
-      { emoji: "🌙", name: "ムーンライトティンカー", desc: "深みを共鳴できる" },
-    ]
+    name:"アイスブレイカー", tagline:"鋭いセンスと圧倒的な存在感",
+    charName:"ブレイク", charAvatar:"⚡", charDesc:"どんな場も凍らせない電撃のカリスマ",
+    badge:"linear-gradient(135deg,#3B5FD4,#1E3A8A)", season:"winter",
+    traits:["カリスマ","行動力","鋭い","社交的"],
+    desc:"圧倒的な存在感と鋭いセンスで場を支配するタイプ。物怖じせず自分の意見をはっきり言え、スピードと決断力があり、場を引き締める力を持つ。",
+    strength:"カリスマ性・瞬時の判断力",
+    weakness:"周りへのペース合わせが苦手なことも",
+    compat:[{emoji:"🌿",name:"サマーエンパス",desc:"感情面を補い合える"},{emoji:"🌙",name:"ムーンライトティンカー",desc:"深みを共鳴できる"}],
+    fortune:{
+      message:"あなたが部屋に入ると空気が変わる。その力は天性のギフト。今こそ最大限に発揮する時、恐れずに前に出よ。",
+      lucky:{items:["ブルー・シルバーのアイテム","電子機器","エナジードリンク"],action:"新しいプロジェクトにリーダーとして立候補する。スピーチや発表の機会に積極的に手を上げる。"},
+      caution:"強さが孤立を生むことがある。たまには弱さを見せる勇気が、深い絆を生む。",
+      item:"⚡", lifeAdvice:"シャープなデザインのインテリアで部屋を統一すると仕事運が高まる。ブルー・ブラックが吉色。"
+    }
   },
   winter_EN: {
-    name: "ウィンタービジョナリー",
-    tagline: "大きな未来を描く戦略家",
-    emoji: "❄️",
-    color: "#4B0082",
-    badge: "linear-gradient(135deg,#3B5FD4,#4B0082)",
-    season: "winter",
-    traits: ["戦略的","直感的","独立心","先見性"],
-    desc: "全体像を俯瞰し、大きな未来を描く戦略家タイプ。直感と論理を組み合わせて、誰も気づかないパターンを見つけ出す。外向きのエネルギーで人を引き込みながら、自分のビジョンへと導いていく。",
-    strength: "大局観・人を動かすビジョン",
-    weakness: "細部の実行を後回しにすることも",
-    compat: [
-      { emoji: "🍂", name: "オータムクラフター", desc: "実行力を補ってくれる" },
-      { emoji: "🌿", name: "サマーエンパス", desc: "チームの温度を保ってくれる" },
-    ]
+    name:"ウィンタービジョナリー", tagline:"大きな未来を描く戦略家",
+    charName:"ノーヴァ", charAvatar:"❄️", charDesc:"星空を設計する宇宙の戦略家",
+    badge:"linear-gradient(135deg,#3B5FD4,#4B0082)", season:"winter",
+    traits:["戦略的","直感的","独立心","先見性"],
+    desc:"全体像を俯瞰し、大きな未来を描く戦略家タイプ。直感と論理を組み合わせて、誰も気づかないパターンを見つけ出す。",
+    strength:"大局観・人を動かすビジョン",
+    weakness:"細部の実行を後回しにすることも",
+    compat:[{emoji:"🍂",name:"オータムクラフター",desc:"実行力を補ってくれる"},{emoji:"🌿",name:"サマーエンパス",desc:"チームの温度を保ってくれる"}],
+    fortune:{
+      message:"あなたが描くビジョンは、まだ誰も見たことのない星座。その地図を持っているのはあなただけ。今こそ羅針盤を手に取る時。",
+      lucky:{items:["星座・宇宙モチーフ","インディゴブルーのもの","瞑想"],action:"10年後の自分を詳細に書き出す。大局的な決断を先延ばしにしない。"},
+      caution:"完璧なタイミングを待ちすぎること。7割の準備でも動き出す勇気が大きな成果を生む。",
+      item:"🌌", lifeAdvice:"天体図や世界地図を飾ると大きな運気の流れが来る。ダークブルー・パープルが吉。"
+    }
   },
   winter_IS: {
-    name: "ウィンタープレシジョン",
-    tagline: "静かな完璧主義と揺るぎない基準",
-    emoji: "💎",
-    color: "#1C4D6E",
-    badge: "linear-gradient(135deg,#4A90B8,#1C4D6E)",
-    season: "winter",
-    traits: ["完璧主義","内省的","高い基準","信頼感"],
-    desc: "高い基準を持ち、静かに徹底するタイプ。感情より事実を重視し、約束を必ず守る信頼感がある。人は少なくても深い関係を好み、自分のフィールドでは誰よりも突き詰める力を持つ。",
-    strength: "信頼性・圧倒的な完成度",
-    weakness: "完璧を求めすぎて疲れることも",
-    compat: [
-      { emoji: "✨", name: "ドリームスパーク", desc: "力を抜く楽しさを教えてくれる" },
-      { emoji: "💫", name: "ルミナスコネクター", desc: "外の世界に連れ出してくれる" },
-    ]
+    name:"ウィンタープレシジョン", tagline:"静かな完璧主義と揺るぎない基準",
+    charName:"クリスタル", charAvatar:"💎", charDesc:"全てを見通す完璧な透明の宝石",
+    badge:"linear-gradient(135deg,#4A90B8,#1C4D6E)", season:"winter",
+    traits:["完璧主義","内省的","高い基準","信頼感"],
+    desc:"高い基準を持ち、静かに徹底するタイプ。感情より事実を重視し、約束を必ず守る信頼感がある。自分のフィールドでは誰よりも突き詰める力を持つ。",
+    strength:"信頼性・圧倒的な完成度",
+    weakness:"完璧を求めすぎて疲れることも",
+    compat:[{emoji:"✨",name:"ドリームスパーク",desc:"力を抜く楽しさを教えてくれる"},{emoji:"💫",name:"ルミナスコネクター",desc:"外の世界に連れ出してくれる"}],
+    fortune:{
+      message:"あなたの誠実さと完璧さは、周りの人が最も信頼するもの。その信頼は宝。今あなたを頼っている人がいる。",
+      lucky:{items:["クリスタル・ダイヤモンド型","水・白のもの","整理整頓グッズ"],action:"デスクや部屋を完璧に整理する。信頼している人に感謝を直接伝える。"},
+      caution:"基準が高すぎて自分を追い詰めることがある。完璧じゃなくてもあなたには十分な価値がある。",
+      item:"💠", lifeAdvice:"クリスタルやガラスの置物が運気を高める。白・シルバーを基調にした清潔感のある部屋が吉。"
+    }
   },
   winter_IN: {
-    name: "ウィンタービジョナリー（深層）",
-    tagline: "孤高の思索者・誰も見ない場所を見る",
-    emoji: "🔭",
-    color: "#2C1654",
-    badge: "linear-gradient(135deg,#4B0082,#2C1654)",
-    season: "winter",
-    traits: ["独自性","深い洞察","内向的","先見性"],
-    desc: "孤独を力に変え、誰も辿り着かない深さへ思考を進めるタイプ。直感と知性が組み合わさり、時代の先を行くアイデアを生み出す。一人の時間が何より大切で、そこから生まれるものが強みになる。",
-    strength: "独自の洞察力・先見性",
-    weakness: "孤立しすぎてしまうことも",
-    compat: [
-      { emoji: "💫", name: "ルミナスコネクター", desc: "世界に橋をかけてくれる" },
-      { emoji: "☀️", name: "サニーリーダー", desc: "外の温かさに触れられる" },
-    ]
+    name:"コズミックソロイスト", tagline:"孤高の思索者・誰も見ない場所を見る",
+    charName:"アビス", charAvatar:"🔭", charDesc:"宇宙の果てを一人で旅する哲学者",
+    badge:"linear-gradient(135deg,#4B0082,#2C1654)", season:"winter",
+    traits:["独自性","深い洞察","内向的","先見性"],
+    desc:"孤独を力に変え、誰も辿り着かない深さへ思考を進めるタイプ。直感と知性が組み合わさり、時代の先を行くアイデアを生み出す。",
+    strength:"独自の洞察力・先見性",
+    weakness:"孤立しすぎてしまうことも",
+    compat:[{emoji:"💫",name:"ルミナスコネクター",desc:"世界に橋をかけてくれる"},{emoji:"☀️",name:"サニーリーダー",desc:"外の温かさに触れられる"}],
+    fortune:{
+      message:"宇宙の孤独の中にある光、それがあなた。誰も理解しないと思っていたあなたを、深く理解したいと思っている人が必ずいる。",
+      lucky:{items:["望遠鏡・天体観測","宇宙・哲学の本","夜空の散歩"],action:"自分の思想をブログや作品で表現する。同じ深さを持つ仲間を一人でいいので見つける。"},
+      caution:"孤独にこもりすぎると運気が停滞する。月に一度は誰かと深い話をする機会を作って。",
+      item:"🌌", lifeAdvice:"暗い色調の落ち着いた空間が思考力を高める。夜の時間帯に一番エネルギーが高まるタイプ。"
+    }
   },
 };
 
 const seasons = {
-  spring: { name:"スプリング", en:"Spring / イエベ春", color:"#FF9966", barColor:"#FF9966",
+  spring:{name:"スプリング",en:"Spring / イエベ春",color:"#FF9966",barColor:"#FF9966",
     palette:["#FFD580","#FF9966","#FF7F7F","#FFB347","#9ACD32","#87CEEB"],
-    colorDesc:"明るく透明感のある暖かい色が似合うタイプ。鮮やかでフレッシュなカラーをまとうと、顔色がパッと明るく見えます。" },
-  summer: { name:"サマー", en:"Summer / ブルベ夏", color:"#9BBBD4", barColor:"#9BBBD4",
+    colorDesc:"明るく透明感のある暖かい色が似合うタイプ。鮮やかでフレッシュなカラーをまとうと、顔色がパッと明るく見えます。"},
+  summer:{name:"サマー",en:"Summer / ブルベ夏",color:"#9BBBD4",barColor:"#9BBBD4",
     palette:["#ADD8E6","#C4A4D4","#B0C4DE","#D8BFD8","#98D0BC","#F4C2C2"],
-    colorDesc:"やわらかくくすんだ涼やかな色が似合うタイプ。パステルやグレイッシュなカラーが顔まわりに映えます。" },
-  autumn: { name:"オータム", en:"Autumn / イエベ秋", color:"#C0603B", barColor:"#C0603B",
+    colorDesc:"やわらかくくすんだ涼やかな色が似合うタイプ。パステルやグレイッシュなカラーが顔まわりに映えます。"},
+  autumn:{name:"オータム",en:"Autumn / イエベ秋",color:"#C0603B",barColor:"#C0603B",
     palette:["#C19A6B","#C0603B","#8B4513","#A0522D","#6B8E23","#D2691E"],
-    colorDesc:"深みのある温かいアースカラーが似合うタイプ。テラコッタやカーキ、ブラウン系が大人の雰囲気を引き出します。" },
-  winter: { name:"ウィンター", en:"Winter / ブルベ冬", color:"#3B5FD4", barColor:"#3B5FD4",
+    colorDesc:"深みのある温かいアースカラーが似合うタイプ。テラコッタやカーキ、ブラウン系が大人の雰囲気を引き出します。"},
+  winter:{name:"ウィンター",en:"Winter / ブルベ冬",color:"#3B5FD4",barColor:"#3B5FD4",
     palette:["#1E3A8A","#C71585","#4B0082","#1C1C1C","#FFFFFF","#00CED1"],
-    colorDesc:"鮮やかでコントラストの強い色が似合うタイプ。ビビッドカラーやモノトーンで洗練されたスタイルが際立ちます。" },
+    colorDesc:"鮮やかでコントラストの強い色が似合うタイプ。ビビッドカラーやモノトーンで洗練されたスタイルが際立ちます。"},
 };
 
-// =====================
-// STATE
-// =====================
-let current = 0;
-let colorScores = { spring:0, summer:0, autumn:0, winter:0 };
-let personaScores = { E:0, I:0, S:0, N:0 };
+// ===== STATE =====
+let current=0, colorScores={spring:0,summer:0,autumn:0,winter:0}, personaScores={E:0,I:0,S:0,N:0};
+let resultTypeKey = '';
 
 function startQuiz() {
-  document.getElementById('start-screen').style.display = 'none';
-  document.getElementById('quiz-screen').style.display = 'flex';
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('quiz-screen').style.display='flex';
   renderQuestion();
 }
 
 function renderQuestion() {
-  const q = questions[current];
-  const total = questions.length;
-
-  document.getElementById('progress-bar').style.width = `${(current/total)*100}%`;
-  document.getElementById('q-counter').textContent = `${current+1} / ${total}`;
-
-  const phase = document.getElementById('q-phase');
-  phase.textContent = q.phase;
-  phase.style.background = q.phaseColor;
-
-  document.getElementById('q-text').textContent = q.text;
-
-  const wrap = document.getElementById('options-wrap');
-  wrap.innerHTML = '';
-
-  if (q.type === 'color') {
-    const div = document.createElement('div');
-    div.className = 'color-card-wrap';
-    q.options.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.className = 'color-option';
-      btn.style.background = opt.gradient;
-      btn.innerHTML = `<span class="opt-label">${opt.label}</span>`;
-      btn.onclick = () => {
+  const q=questions[current], total=questions.length;
+  document.getElementById('progress-bar').style.width=`${(current/total)*100}%`;
+  document.getElementById('q-counter').textContent=`${current+1} / ${total}`;
+  const ph=document.getElementById('q-phase');
+  ph.textContent=q.phase; ph.style.background=q.phaseColor;
+  document.getElementById('q-text').textContent=q.text;
+  const wrap=document.getElementById('options-wrap');
+  wrap.innerHTML='';
+  if(q.type==='color'){
+    const div=document.createElement('div'); div.className='color-card-wrap';
+    q.options.forEach(opt=>{
+      const btn=document.createElement('button');
+      btn.className='color-option'; btn.style.background=opt.gradient;
+      btn.innerHTML=`<span class="opt-label">${opt.label}</span>`;
+      btn.onclick=()=>{
         flashEffect(btn.style.background);
-        for (const k in opt.scores) colorScores[k] += opt.scores[k];
-        btn.classList.add('selected');
-        setTimeout(nextQuestion, 300);
+        for(const k in opt.scores) colorScores[k]+=opt.scores[k];
+        btn.classList.add('selected'); setTimeout(nextQuestion,300);
       };
       div.appendChild(btn);
     });
     wrap.appendChild(div);
   } else {
-    const div = document.createElement('div');
-    div.className = 'text-option-wrap';
-    q.options.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.className = 'text-option';
-      btn.innerHTML = `${opt.label}<div class="opt-sub">${opt.sub}</div>`;
-      btn.onclick = () => {
-        for (const k in opt.scores) personaScores[k] += opt.scores[k];
-        btn.classList.add('selected');
-        setTimeout(nextQuestion, 300);
-      };
+    const div=document.createElement('div'); div.className='text-option-wrap';
+    q.options.forEach(opt=>{
+      const btn=document.createElement('button'); btn.className='text-option';
+      btn.innerHTML=`${opt.label}<div class="opt-sub">${opt.sub}</div>`;
+      btn.onclick=()=>{ for(const k in opt.scores) personaScores[k]+=opt.scores[k]; btn.classList.add('selected'); setTimeout(nextQuestion,300); };
       div.appendChild(btn);
     });
     wrap.appendChild(div);
   }
 }
 
-function flashEffect(bg) {
-  const f = document.getElementById('flash');
-  f.style.background = bg;
-  f.style.opacity = '0.15';
-  setTimeout(() => { f.style.opacity = '0'; }, 180);
+function flashEffect(bg){
+  const f=document.getElementById('flash');
+  f.style.background=bg; f.style.opacity='0.15';
+  setTimeout(()=>{f.style.opacity='0';},180);
 }
 
-function skipQuestion() { nextQuestion(); }
+function skipQuestion(){ nextQuestion(); }
 
-function nextQuestion() {
+function nextQuestion(){
   current++;
-  if (current >= questions.length) showResult();
+  if(current>=questions.length) showResult();
   else renderQuestion();
 }
 
-function showResult() {
-  document.getElementById('quiz-screen').style.display = 'none';
-  document.getElementById('result-screen').style.display = 'flex';
+function showResult(){
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('result-screen').style.display='flex';
 
-  // determine season
-  const season = Object.entries(colorScores).sort((a,b)=>b[1]-a[1])[0][0];
+  const season=Object.entries(colorScores).sort((a,b)=>b[1]-a[1])[0][0];
+  const eAxis=personaScores.E>=personaScores.I?'E':'I';
+  const sAxis=personaScores.S>=personaScores.N?'S':'N';
+  resultTypeKey=`${season}_${eAxis}${sAxis}`;
+  const pt=personalityTypes[resultTypeKey]||personalityTypes[`${season}_ES`];
+  const sd=seasons[season];
 
-  // determine axis
-  const eAxis = personaScores.E >= personaScores.I ? 'E' : 'I';
-  const sAxis = personaScores.S >= personaScores.N ? 'S' : 'N';
-  const typeKey = `${season}_${eAxis}${sAxis}`;
+  // Character card
+  document.getElementById('char-card').style.background=pt.badge;
+  document.getElementById('char-avatar').textContent=pt.charAvatar;
+  document.getElementById('char-name').textContent=`キャラクター：${pt.charName}`;
+  document.getElementById('char-title').textContent=pt.name;
+  document.getElementById('char-tagline').textContent=pt.tagline;
+  document.getElementById('char-type-badge').textContent=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
 
-  const ptype = personalityTypes[typeKey] || personalityTypes[`${season}_ES`];
-  const sdata = seasons[season];
-
-  // badge
-  const badge = document.getElementById('result-badge');
-  badge.style.background = ptype.badge;
-  badge.textContent = ptype.emoji;
-
-  document.getElementById('result-type').textContent = `${sdata.name} × ${eAxis === 'E' ? '外向' : '内向'} × ${sAxis === 'S' ? '感覚' : '直感'}`;
-  document.getElementById('result-name').textContent = ptype.name;
-  document.getElementById('result-tagline').textContent = ptype.tagline;
-
-  buildColorTab(sdata, ptype);
-  buildPersonaTab(ptype);
-  buildScoreTab(sdata, eAxis, sAxis);
+  buildColorTab(sd,pt);
+  buildPersonaTab(pt);
+  buildFortuneTab(pt,sd);
+  buildShareTab(pt,sd,eAxis,sAxis);
 }
 
-function buildColorTab(sdata, ptype) {
-  const tab = document.getElementById('tab-color');
-  tab.innerHTML = `
+function buildColorTab(sd,pt){
+  const tab=document.getElementById('tab-color');
+  tab.innerHTML=`
     <div class="season-header">
-      <div class="season-dot" style="background:${sdata.color}"></div>
-      <div>
-        <div class="season-name">${sdata.name}</div>
-        <div class="season-en">${sdata.en}</div>
-      </div>
+      <div class="season-dot" style="background:${sd.color}"></div>
+      <div><div class="season-name">${sd.name}</div><div class="season-en">${sd.en}</div></div>
     </div>
-    <div class="section-desc">${sdata.colorDesc}</div>
+    <div class="section-desc">${sd.colorDesc}</div>
     <div class="palette-label">ベストカラー</div>
-    <div class="palette-row" id="palette-swatches"></div>
+    <div class="palette-row" id="ps"></div>
   `;
-  const row = tab.querySelector('#palette-swatches');
-  sdata.palette.forEach(c => {
-    const sw = document.createElement('div');
-    sw.className = 'swatch';
-    sw.style.background = c;
-    row.appendChild(sw);
-  });
+  const row=tab.querySelector('#ps');
+  sd.palette.forEach(c=>{ const sw=document.createElement('div'); sw.className='swatch'; sw.style.background=c; row.appendChild(sw); });
 }
 
-function buildPersonaTab(ptype) {
-  const tab = document.getElementById('tab-persona');
-  tab.innerHTML = `
-    <div class="trait-row">${ptype.traits.map(t => `<span class="trait-tag">${t}</span>`).join('')}</div>
-    <div class="persona-card">
-      <div class="persona-card-title">どんな人？</div>
-      <div class="persona-card-body">${ptype.desc}</div>
-    </div>
-    <div class="persona-card">
-      <div class="persona-card-title">強み</div>
-      <div class="persona-card-body">💪 ${ptype.strength}</div>
-    </div>
-    <div class="persona-card">
-      <div class="persona-card-title">気をつけたいこと</div>
-      <div class="persona-card-body">💡 ${ptype.weakness}</div>
-    </div>
+function buildPersonaTab(pt){
+  document.getElementById('tab-persona').innerHTML=`
+    <div class="trait-row">${pt.traits.map(t=>`<span class="trait-tag">${t}</span>`).join('')}</div>
+    <div class="persona-card"><div class="persona-card-title">どんな人？</div><div class="persona-card-body">${pt.desc}</div></div>
+    <div class="persona-card"><div class="persona-card-title">強み</div><div class="persona-card-body">💪 ${pt.strength}</div></div>
+    <div class="persona-card"><div class="persona-card-title">気をつけたいこと</div><div class="persona-card-body">💡 ${pt.weakness}</div></div>
     <div class="persona-card">
       <div class="persona-card-title">相性のいいタイプ</div>
       <div class="compat-row">
-        ${ptype.compat.map(c => `
-          <div class="compat-card">
-            <div class="compat-emoji">${c.emoji}</div>
-            <div class="compat-name">${c.name}</div>
-            <div class="compat-desc">${c.desc}</div>
-          </div>
-        `).join('')}
+        ${pt.compat.map(c=>`<div class="compat-card"><div class="compat-emoji">${c.emoji}</div><div class="compat-name">${c.name}</div><div class="compat-desc">${c.desc}</div></div>`).join('')}
       </div>
     </div>
   `;
 }
 
-function buildScoreTab(sdata, eAxis, sAxis) {
-  const tab = document.getElementById('tab-score');
-  const totalColor = Object.values(colorScores).reduce((a,b)=>a+b,1);
-
-  let html = '<div style="font-size:13px;color:#999;margin-bottom:14px;">カラー傾向</div>';
-  ['spring','summer','autumn','winter'].forEach(s => {
-    const pct = Math.round((colorScores[s]/totalColor)*100);
-    html += `
-      <div class="score-row">
-        <div class="score-label">${seasons[s].name}</div>
-        <div class="score-bar-bg">
-          <div class="score-bar-fill" style="width:0%;background:${seasons[s].barColor}" data-target="${pct}"></div>
-        </div>
-        <div class="score-val">${pct}%</div>
-      </div>`;
-  });
-
-  // E/I axis
-  const totalEI = personaScores.E + personaScores.I || 1;
-  const ePct = Math.round((personaScores.E / totalEI) * 100);
-
-  // S/N axis
-  const totalSN = personaScores.S + personaScores.N || 1;
-  const sPct = Math.round((personaScores.S / totalSN) * 100);
-
-  html += `
-    <div class="axis-section">
-      <div class="axis-title">性格軸</div>
-      <div class="axis-bar-wrap">
-        <div class="axis-labels">
-          <span class="axis-lbl">外向 (E)</span>
-          <span class="axis-lbl">内向 (I)</span>
-        </div>
-        <div class="axis-track">
-          <div class="axis-fill" style="left:0;width:0%;background:linear-gradient(90deg,#FF9966,#FFB347)" data-target="${ePct}%" data-prop="width"></div>
-          <div class="axis-thumb" style="left:0%" data-target="${ePct}%" data-prop="left"></div>
-        </div>
+function buildFortuneTab(pt,sd){
+  const f=pt.fortune;
+  document.getElementById('tab-fortune').innerHTML=`
+    <div class="fortune-header">
+      <div class="fortune-moon">${f.item}</div>
+      <div class="fortune-title">${pt.charName}の占い</div>
+      <div class="fortune-subtitle">${pt.name}へのメッセージ</div>
+    </div>
+    <div class="fortune-message" style="background:${pt.badge}">
+      <div class="fortune-message-quote">✦ 今のあなたへ ✦</div>
+      <div class="fortune-message-body">${f.message}</div>
+    </div>
+    <div class="fortune-card fortune-lucky">
+      <span class="fortune-card-icon">🍀</span>
+      <div class="fortune-card-title">LUCKY ITEMS</div>
+      <div class="fortune-card-body">
+        <div class="lucky-items-row">${f.lucky.items.map(i=>`<span class="lucky-item">${i}</span>`).join('')}</div>
       </div>
-      <div class="axis-bar-wrap">
-        <div class="axis-labels">
-          <span class="axis-lbl">感覚 (S)</span>
-          <span class="axis-lbl">直感 (N)</span>
-        </div>
-        <div class="axis-track">
-          <div class="axis-fill" style="left:0;width:0%;background:linear-gradient(90deg,#9BBBD4,#C4A4D4)" data-target="${sPct}%" data-prop="width"></div>
-          <div class="axis-thumb" style="left:0%" data-target="${sPct}%" data-prop="left"></div>
+    </div>
+    <div class="fortune-card fortune-action">
+      <span class="fortune-card-icon">⚡</span>
+      <div class="fortune-card-title">運気が上がるアクション</div>
+      <div class="fortune-card-body">${f.lucky.action}</div>
+    </div>
+    <div class="fortune-card fortune-caution">
+      <span class="fortune-card-icon">⚠️</span>
+      <div class="fortune-card-title">注意したいこと</div>
+      <div class="fortune-card-body">${f.caution}</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-title">🏠 インテリア＆ライフアドバイス</div>
+      <div class="persona-card-body">${f.lifeAdvice}</div>
+    </div>
+  `;
+}
+
+function buildShareTab(pt,sd,eAxis,sAxis){
+  const typeLabel=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
+  const shareText=`🎨 カラー＆性格診断の結果\n\nキャラクター：${pt.charName}（${pt.charAvatar}）\nタイプ：${pt.name}\n「${pt.tagline}」\n\n${typeLabel}\n\n#カラー性格診断 #パーソナルカラー`;
+
+  document.getElementById('tab-share').innerHTML=`
+    <div class="share-card" style="background:${pt.badge}">
+      <div class="share-card-inner">
+        <span class="share-char">${pt.charAvatar}</span>
+        <div class="share-name">${pt.name}</div>
+        <div class="share-sub">${pt.charName} · ${typeLabel}</div>
+        <div class="share-tags">
+          ${pt.traits.map(t=>`<span class="share-tag">${t}</span>`).join('')}
         </div>
       </div>
     </div>
+    <button class="share-btn share-btn-copy" onclick="copyResult()">📋 結果をコピーしてシェア</button>
   `;
 
-  tab.innerHTML = html;
-
-  // animate
-  setTimeout(() => {
-    tab.querySelectorAll('.score-bar-fill').forEach(el => {
-      el.style.width = el.dataset.target + '%';
-    });
-    tab.querySelectorAll('[data-prop="width"]').forEach(el => {
-      el.style.width = el.dataset.target;
-    });
-    tab.querySelectorAll('[data-prop="left"]').forEach(el => {
-      el.style.left = el.dataset.target;
-    });
-  }, 100);
+  window._shareText=shareText;
 }
 
-function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.toggle('active', b.getAttribute('onclick') === `switchTab('${name}')`);
+function copyResult(){
+  navigator.clipboard.writeText(window._shareText).then(()=>{
+    const toast=document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),2000);
+  }).catch(()=>{
+    alert(window._shareText);
   });
-  document.querySelectorAll('.tab-content').forEach(c => {
-    c.classList.toggle('active', c.id === `tab-${name}`);
-  });
-
-  // re-animate score bars when switching to score tab
-  if (name === 'score') {
-    setTimeout(() => {
-      document.querySelectorAll('#tab-score .score-bar-fill').forEach(el => {
-        el.style.width = el.dataset.target + '%';
-      });
-      document.querySelectorAll('#tab-score [data-prop="width"]').forEach(el => {
-        el.style.width = el.dataset.target;
-      });
-      document.querySelectorAll('#tab-score [data-prop="left"]').forEach(el => {
-        el.style.left = el.dataset.target;
-      });
-    }, 50);
-  }
 }
 
-function resetQuiz() {
-  current = 0;
-  colorScores = { spring:0, summer:0, autumn:0, winter:0 };
-  personaScores = { E:0, I:0, S:0, N:0 };
-  document.getElementById('result-screen').style.display = 'none';
-  document.getElementById('start-screen').style.display = 'block';
-  // reset tabs
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===0));
-  document.querySelectorAll('.tab-content').forEach((c,i) => c.classList.toggle('active', i===0));
+function switchTab(name){
+  const names=['color','persona','fortune','share'];
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('onclick')===`switchTab('${name}')`);
+  });
+  document.querySelectorAll('.tab-content').forEach(c=>{
+    c.classList.toggle('active', c.id===`tab-${name}`);
+  });
+}
+
+function resetQuiz(){
+  current=0; colorScores={spring:0,summer:0,autumn:0,winter:0}; personaScores={E:0,I:0,S:0,N:0};
+  document.getElementById('result-screen').style.display='none';
+  document.getElementById('start-screen').style.display='block';
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.querySelectorAll('.tab-content').forEach((c,i)=>c.classList.toggle('active',i===0));
 }
 </script>
 </body>
