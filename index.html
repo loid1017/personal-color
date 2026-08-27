@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>カラー&性格診断</title>
+<title>わたしカラー診断</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -246,9 +246,9 @@
 <div id="app">
 
   <div id="start-screen">
-    <div class="logo">🎨</div>
+    <div class="logo">🌸✨🎀</div>
     <div class="made-by">Version 0.1 &nbsp;·&nbsp; made by ロイド</div>
-    <div class="title">カラー＆性格診断</div>
+    <div class="title">わたしカラー診断</div>
     <div class="subtitle">色の直感選びで<br>パーソナルカラーと性格タイプがわかる</div>
     <div class="badge-row">
       <span class="badge">16問</span>
@@ -809,7 +809,7 @@ function buildFortuneTab(pt,sd){
 
 function buildShareTab(pt,sd,eAxis,sAxis){
   const typeLabel=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
-  const shareText=`🎨 カラー＆性格診断の結果\n\nキャラクター：${pt.charName}（${pt.charAvatar}）\nタイプ：${pt.name}\n「${pt.tagline}」\n\n${typeLabel}\n\n#カラー性格診断 #パーソナルカラー`;
+  const shareText=`🌸 わたしカラー診断の結果\n\nキャラクター：${pt.charName}（${pt.charAvatar}）\nタイプ：${pt.name}\n「${pt.tagline}」\n\n${typeLabel}\n\n#カラー性格診断 #パーソナルカラー`;
 
   document.getElementById('tab-share').innerHTML=`
     <div class="share-card" style="background:${pt.badge}">
