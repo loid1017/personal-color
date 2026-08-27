@@ -299,7 +299,7 @@
   .typelist-card-avatar { font-size: 26px; flex-shrink: 0; }
   .typelist-card-info { overflow: hidden; }
   .typelist-card-name { font-size: 11px; font-weight: 800; color: #1a1a1a; line-height: 1.3; }
-  .typelist-card-char { font-size: 10px; color: #aaa; margin-top: 2px; }
+  .typelist-card-char { font-size: 9px; color: #aaa; margin-top: 2px; line-height: 1.4; }
 
   /* ===== TYPE MODAL ===== */
   #type-modal {
@@ -833,7 +833,7 @@ const seasonLabels = {spring:'🌸 スプリング',summer:'🌊 サマー',autu
       const card = document.createElement('div');
       card.className = 'typelist-card';
       card.style.borderColor = seasonColors[s]+'44';
-      card.innerHTML=`<div class="typelist-card-avatar">${v.charAvatar}</div><div class="typelist-card-info"><div class="typelist-card-name">${v.name}</div><div class="typelist-card-char">${v.charName}</div></div>`;
+      card.innerHTML=`<div class="typelist-card-avatar">${v.charAvatar}</div><div class="typelist-card-info"><div class="typelist-card-name">${v.name}</div><div class="typelist-card-char">${v.charName}（${v.charDesc}）</div></div>`;
       card.onclick = ()=>openTypeModal(k);
       grid.appendChild(card);
     });
