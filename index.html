@@ -113,7 +113,7 @@
   /* tabs */
   .tab-bar { display: flex; width: 100%; border-bottom: 2px solid #eee; margin-bottom: 24px; }
   .tab-btn {
-    flex: 1; padding: 10px 0; font-size: 12px; font-weight: 600;
+    flex: 1; padding: 10px 0; font-size: 11px; font-weight: 600;
     color: #bbb; background: none; border: none; cursor: pointer;
     border-bottom: 2px solid transparent; margin-bottom: -2px;
     transition: color 0.2s, border-color 0.2s;
@@ -226,6 +226,27 @@
   }
   .copy-toast.show { opacity: 1; }
 
+  /* ===== COMPAT TAB ===== */
+  .compat-tab-intro { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:20px; }
+  .compat-my-card { border-radius:16px; padding:16px 24px; text-align:center; min-width:140px; }
+  .compat-arrow { font-size:28px; }
+  .compat-select-wrap select {
+    width:100%; border:2px solid #e0e0e0; border-radius:50px; padding:12px 20px;
+    font-size:14px; font-weight:600; background:#fff; cursor:pointer;
+    appearance:none; text-align:center;
+  }
+  .compat-result-card {
+    background:#fff; border-radius:20px; padding:24px 20px; text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.08); animation: fadeIn 0.4s ease;
+  }
+  .compat-pair { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px; }
+  .compat-pair-item { border-radius:14px; padding:14px 18px; display:flex; flex-direction:column; align-items:center; gap:4px; min-width:90px; }
+  .compat-pair-name { font-size:12px; color:#fff; font-weight:700; }
+  .compat-pair-heart { font-size:22px; color:#aaa; font-weight:700; }
+  .compat-stars { font-size:28px; color:#FFB347; letter-spacing:3px; margin-bottom:8px; }
+  .compat-label { font-size:16px; font-weight:800; color:#1a1a1a; margin-bottom:10px; }
+  .compat-desc { font-size:13px; color:#555; line-height:1.7; }
+
   .retry-btn {
     background: #1a1a1a; color: white; border: none;
     border-radius: 50px; padding: 14px 40px; font-size: 15px; font-weight: 600;
@@ -283,12 +304,14 @@
       <button class="tab-btn active" onclick="switchTab('color')">カラー</button>
       <button class="tab-btn" onclick="switchTab('persona')">性格</button>
       <button class="tab-btn" onclick="switchTab('fortune')">占い</button>
+      <button class="tab-btn" onclick="switchTab('compat')">💕相性</button>
       <button class="tab-btn" onclick="switchTab('share')">シェア</button>
     </div>
 
     <div class="tab-content active" id="tab-color"></div>
     <div class="tab-content" id="tab-persona"></div>
     <div class="tab-content" id="tab-fortune"></div>
+    <div class="tab-content" id="tab-compat"></div>
     <div class="tab-content" id="tab-share"></div>
 
     <button class="retry-btn" onclick="resetQuiz()">もう一度診断する</button>
@@ -738,6 +761,7 @@ function showResult(){
   buildColorTab(sd,pt);
   buildPersonaTab(pt);
   buildFortuneTab(pt,sd);
+  buildCompatTab(pt,resultTypeKey);
   buildShareTab(pt,sd,eAxis,sAxis);
 }
 
@@ -828,6 +852,95 @@ function buildShareTab(pt,sd,eAxis,sAxis){
   window._shareText=shareText;
 }
 
+// ===== COMPAT =====
+const compatData = (function(){
+  // シーズン相性スコア(0-2): 同じ=2, イエベ同士/ブルベ同士=1, 異なる=0
+  function seasonScore(a,b){
+    if(a===b) return 2;
+    const ye=['spring','autumn'], bl=['summer','winter'];
+    if((ye.includes(a)&&ye.includes(b))||(bl.includes(a)&&bl.includes(b))) return 1;
+    return 0;
+  }
+  // 性格軸相性(0-2): E×I=2(引き合う), S×N=2(補い合う), 同じ=1
+  function axisScore(ae,as,be,bs){
+    const e = ae!==be ? 2 : 1;
+    const s = as!==bs ? 2 : 1;
+    return e+s; // 2-4
+  }
+  // メッセージマップ
+  const msgs = {
+    '5': {stars:5, label:'運命的な相性✨', desc:'お互いの色が混ざり合うと最高の絵が生まれる。価値観の違いが化学反応を起こし、一緒にいると二人とも輝きが増す。'},
+    '4': {stars:4, label:'とても相性◎', desc:'違いを楽しみながら高め合える関係。相手のペースに合わせることで、さらに深いつながりになる。'},
+    '3': {stars:3, label:'バランス良し', desc:'似た部分と違う部分が程よく混在。居心地のいい安定感がある。'},
+    '2': {stars:2, label:'刺激的な関係', desc:'共通点は少ないが、だからこそ新鮮。お互いを理解しようとする努力が大切。'},
+    '1': {stars:1, label:'成長できる組合せ', desc:'最初は分かり合えない部分も。でも根気よく関わると意外な共鳴ポイントが見つかる。'},
+  };
+  return function(keyA, keyB){
+    const [sA, axA] = keyA.split('_');
+    const [sB, axB] = keyB.split('_');
+    const eA=axA[0], sAx=axA[1], eB=axB[0], sBx=axB[1];
+    const ss = seasonScore(sA,sB);
+    const as = axisScore(eA,sAx,eB,sBx);
+    const total = ss + as; // 0-6
+    const stars = total<=1?1 : total<=2?2 : total<=3?3 : total<=4?4 : 5;
+    return {...msgs[String(stars)], stars};
+  };
+})();
+
+function buildCompatTab(myPt, myKey){
+  const allKeys = Object.keys(personalityTypes);
+  const tab = document.getElementById('tab-compat');
+
+  const selectHTML = allKeys.map(k=>{
+    const p = personalityTypes[k];
+    return `<option value="${k}">${p.charAvatar} ${p.name}</option>`;
+  }).join('');
+
+  tab.innerHTML=`
+    <div class="compat-tab-intro">
+      <div class="compat-my-card" style="background:${myPt.badge}">
+        <span style="font-size:32px">${myPt.charAvatar}</span>
+        <div style="font-weight:700;color:#fff;margin-top:6px">${myPt.name}</div>
+      </div>
+      <div class="compat-arrow">💕</div>
+      <div class="compat-select-wrap">
+        <select id="compat-select" onchange="updateCompat('${myKey}')">
+          <option value="">相手のタイプを選んで</option>
+          ${selectHTML}
+        </select>
+      </div>
+    </div>
+    <div id="compat-result"></div>
+  `;
+}
+
+function updateCompat(myKey){
+  const sel = document.getElementById('compat-select');
+  const theirKey = sel.value;
+  if(!theirKey) return;
+  const theirPt = personalityTypes[theirKey];
+  const result = compatData(myKey, theirKey);
+  const stars = '★'.repeat(result.stars) + '☆'.repeat(5-result.stars);
+  document.getElementById('compat-result').innerHTML=`
+    <div class="compat-result-card">
+      <div class="compat-pair">
+        <div class="compat-pair-item" style="background:${personalityTypes[myKey].badge}">
+          <span style="font-size:28px">${personalityTypes[myKey].charAvatar}</span>
+          <div class="compat-pair-name">${personalityTypes[myKey].charName}</div>
+        </div>
+        <div class="compat-pair-heart">×</div>
+        <div class="compat-pair-item" style="background:${theirPt.badge}">
+          <span style="font-size:28px">${theirPt.charAvatar}</span>
+          <div class="compat-pair-name">${theirPt.charName}</div>
+        </div>
+      </div>
+      <div class="compat-stars">${stars}</div>
+      <div class="compat-label">${result.label}</div>
+      <div class="compat-desc">${result.desc}</div>
+    </div>
+  `;
+}
+
 function copyResult(){
   navigator.clipboard.writeText(window._shareText).then(()=>{
     const toast=document.getElementById('copy-toast');
@@ -839,7 +952,6 @@ function copyResult(){
 }
 
 function switchTab(name){
-  const names=['color','persona','fortune','share'];
   document.querySelectorAll('.tab-btn').forEach(b=>{
     b.classList.toggle('active', b.getAttribute('onclick')===`switchTab('${name}')`);
   });
