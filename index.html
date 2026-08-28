@@ -247,6 +247,22 @@
   .compat-label { font-size:16px; font-weight:800; color:#1a1a1a; margin-bottom:10px; }
   .compat-desc { font-size:13px; color:#555; line-height:1.7; }
 
+  /* ===== GLOBAL RANKING ===== */
+  .rank-loading { text-align:center; color:#bbb; font-size:13px; padding:16px; }
+  .global-rank-row { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid #f0f0f0; }
+  .global-rank-row:last-child { border-bottom:none; }
+  .global-rank-avatar { font-size:24px; flex-shrink:0; }
+  .global-rank-info { flex:1; }
+  .global-rank-name { font-size:13px; font-weight:700; color:#1a1a1a; }
+  .global-rank-char { font-size:11px; font-weight:600; margin-top:2px; }
+  .global-rank-count { font-size:13px; font-weight:800; color:#888; flex-shrink:0; }
+  .reload-ranking-btn {
+    width:100%; margin-top:12px; padding:10px; background:#f5f5f5;
+    border:none; border-radius:50px; font-size:12px; font-weight:600;
+    color:#888; cursor:pointer; transition:background 0.2s;
+  }
+  .reload-ranking-btn:hover { background:#eee; }
+
   /* ===== RANKING ===== */
   .rank-section { background:#faf9f7; border-radius:16px; padding:16px; margin-top:16px; }
   .rank-section-title { font-size:12px; font-weight:700; color:#888; margin-bottom:12px; letter-spacing:0.05em; }
@@ -369,6 +385,80 @@
   @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);} }
   .char-avatar { animation: float 3s ease-in-out infinite; }
 </style>
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, increment, collection, getDocs, orderBy, query, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAjAZn8zNFmhzF63kWkEzey6IxXOiZEPO8",
+  authDomain: "personal-color-c15a9.firebaseapp.com",
+  projectId: "personal-color-c15a9",
+  storageBucket: "personal-color-c15a9.firebasestorage.app",
+  messagingSenderId: "757415480013",
+  appId: "1:757415480013:web:76715533ff459759553784"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 結果をFirestoreに保存
+window.saveResultToFirebase = async function(typeKey) {
+  try {
+    const ref = doc(db, 'rankings', typeKey);
+    const snap = await getDoc(ref);
+    if(snap.exists()) {
+      await setDoc(ref, { count: increment(1) }, { merge: true });
+    } else {
+      const pt = window._personalityTypes[typeKey];
+      const season = typeKey.split('_')[0];
+      await setDoc(ref, {
+        count: 1,
+        name: pt.name,
+        charName: pt.charName,
+        charAvatar: pt.charAvatar,
+        season: season
+      });
+    }
+  } catch(e) { console.error('Firebase save error:', e); }
+};
+
+// ランキングを取得して表示
+window.loadRanking = async function() {
+  const el = document.getElementById('global-ranking-list');
+  if(!el) return;
+  el.innerHTML = '<div class="rank-loading">読み込み中...</div>';
+  try {
+    const q = query(collection(db, 'rankings'), orderBy('count','desc'), limit(16));
+    const snap = await getDocs(q);
+    if(snap.empty){ el.innerHTML='<div class="rank-loading">まだデータがありません</div>'; return; }
+    const seasonColors = {spring:'#FF9966',summer:'#9BBBD4',autumn:'#C0603B',winter:'#3B5FD4'};
+    let html = '';
+    const rankEmoji = ['🥇','🥈','🥉'];
+    let i = 0;
+    snap.forEach((d)=>{
+      const data = d.data();
+      const medal = i < 3 ? rankEmoji[i] : String(i+1);
+      i++;
+      html += `<div class="global-rank-row">
+        <span class="rank-medal">${medal}</span>
+        <span class="global-rank-avatar">${data.charAvatar}</span>
+        <div class="global-rank-info">
+          <div class="global-rank-name">${data.name}</div>
+          <div class="global-rank-char" style="color:${seasonColors[data.season]}">${data.charName}</div>
+        </div>
+        <span class="global-rank-count">${data.count}人</span>
+      </div>`;
+    });
+    el.innerHTML = html;
+  } catch(e) {
+    el.innerHTML='<div class="rank-loading">読み込みエラー</div>';
+    console.error(e);
+  }
+};
+
+window._firebaseReady = true;
+</script>
 </head>
 <body>
 <div id="app">
@@ -407,6 +497,14 @@
         </div>
       </div>
       <div id="qc-result"></div>
+    </div>
+
+    <!-- Global Ranking -->
+    <div class="typelist-wrap">
+      <div class="typelist-title">🌍 みんなの診断結果ランキング</div>
+      <div class="typelist-subtitle">リアルタイム集計</div>
+      <div id="global-ranking-list"><div class="rank-loading">読み込み中...</div></div>
+      <button class="reload-ranking-btn" onclick="if(window.loadRanking) window.loadRanking()">🔄 更新</button>
     </div>
 
     <!-- Type List -->
@@ -832,6 +930,10 @@ let resultTypeKey = '';
 // ===== TYPE LIST =====
 const seasonColors = {spring:'#FF9966',summer:'#9BBBD4',autumn:'#C0603B',winter:'#3B5FD4'};
 const seasonLabels = {spring:'🌸 スプリング',summer:'🌊 サマー',autumn:'🍂 オータム',winter:'❄️ ウィンター'};
+window._personalityTypes = personalityTypes;
+
+// ランキング自動読み込み（Firebase準備後）
+setTimeout(()=>{ if(window.loadRanking) window.loadRanking(); }, 1500);
 
 (function buildTypeList(){
   const container = document.getElementById('typelist-seasons');
@@ -1012,6 +1114,9 @@ function showResult(){
   document.getElementById('char-title').textContent=pt.name;
   document.getElementById('char-tagline').textContent=pt.tagline;
   document.getElementById('char-type-badge').textContent=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
+
+  // Firebaseに結果を保存
+  if(window.saveResultToFirebase) window.saveResultToFirebase(resultTypeKey);
 
   buildColorTab(sd,pt,eAxis,sAxis);
   buildPersonaTab(pt);
