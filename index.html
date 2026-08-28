@@ -445,7 +445,6 @@ window.loadRanking = async function() {
         <span class="global-rank-avatar">${data.charAvatar}</span>
         <div class="global-rank-info">
           <div class="global-rank-name">${data.name}</div>
-          <div class="global-rank-char" style="color:${seasonColors[data.season]}">${data.charName}</div>
         </div>
         <span class="global-rank-count">${data.count}人</span>
       </div>`;
@@ -953,7 +952,7 @@ setTimeout(()=>{ if(window.loadRanking) window.loadRanking(); }, 1500);
       const card = document.createElement('div');
       card.className = 'typelist-card';
       card.style.borderColor = seasonColors[s]+'44';
-      card.innerHTML=`<div class="typelist-card-avatar">${v.charAvatar}</div><div class="typelist-card-info"><div class="typelist-card-name">${v.name}</div><div class="typelist-card-char">${v.charName}（${v.charDesc}）</div></div>`;
+      card.innerHTML=`<div class="typelist-card-avatar">${v.charAvatar}</div><div class="typelist-card-info"><div class="typelist-card-name">${v.name}</div><div class="typelist-card-char">${v.charDesc}</div></div>`;
       card.onclick = ()=>openTypeModal(k);
       grid.appendChild(card);
     });
@@ -1031,9 +1030,9 @@ function quickCompat(){
   const sA = a.split('_')[0], sB = b.split('_')[0];
   res.innerHTML=`
     <div class="qc-pair">
-      <span class="qc-pair-chip" style="background:${seasonColors[sA]}">${ptA.charAvatar} ${ptA.charName}</span>
+      <span class="qc-pair-chip" style="background:${seasonColors[sA]}">${ptA.charAvatar} ${ptA.name}</span>
       <span style="color:#ccc;font-size:14px">×</span>
-      <span class="qc-pair-chip" style="background:${seasonColors[sB]}">${ptB.charAvatar} ${ptB.charName}</span>
+      <span class="qc-pair-chip" style="background:${seasonColors[sB]}">${ptB.charAvatar} ${ptB.name}</span>
     </div>
     <div class="qc-stars">${stars}</div>
     <div class="qc-label">${r.label}</div>
@@ -1110,7 +1109,7 @@ function showResult(){
   // Character card
   document.getElementById('char-card').style.background=pt.badge;
   document.getElementById('char-avatar').textContent=pt.charAvatar;
-  document.getElementById('char-name').textContent=`キャラクター：${pt.charName}`;
+  document.getElementById('char-name').textContent='';
   document.getElementById('char-title').textContent=pt.name;
   document.getElementById('char-tagline').textContent=pt.tagline;
   document.getElementById('char-type-badge').textContent=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
@@ -1211,7 +1210,7 @@ function buildFortuneTab(pt,sd){
   document.getElementById('tab-fortune').innerHTML=`
     <div class="fortune-header">
       <div class="fortune-moon">${f.item}</div>
-      <div class="fortune-title">${pt.charName}の占い</div>
+      <div class="fortune-title">${pt.name}の占い</div>
       <div class="fortune-subtitle">${pt.name}へのメッセージ</div>
     </div>
     <div class="fortune-message" style="background:${pt.badge}">
@@ -1244,14 +1243,14 @@ function buildFortuneTab(pt,sd){
 
 function buildShareTab(pt,sd,eAxis,sAxis){
   const typeLabel=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
-  const shareText=`🌸 わたしカラー診断の結果\n\nキャラクター：${pt.charName}（${pt.charAvatar}）\nタイプ：${pt.name}\n「${pt.tagline}」\n\n${typeLabel}\n\n#カラー性格診断 #パーソナルカラー`;
+  const shareText=`🌸 わたしカラー診断の結果\n\n${pt.charAvatar} ${pt.name}\n「${pt.tagline}」\n\n${typeLabel}\n\n#カラー性格診断 #パーソナルカラー`;
 
   document.getElementById('tab-share').innerHTML=`
     <div class="share-card" style="background:${pt.badge}">
       <div class="share-card-inner">
         <span class="share-char">${pt.charAvatar}</span>
         <div class="share-name">${pt.name}</div>
-        <div class="share-sub">${pt.charName} · ${typeLabel}</div>
+        <div class="share-sub">${typeLabel}</div>
         <div class="share-tags">
           ${pt.traits.map(t=>`<span class="share-tag">${t}</span>`).join('')}
         </div>
@@ -1337,12 +1336,12 @@ function updateCompat(myKey){
       <div class="compat-pair">
         <div class="compat-pair-item" style="background:${personalityTypes[myKey].badge}">
           <span style="font-size:28px">${personalityTypes[myKey].charAvatar}</span>
-          <div class="compat-pair-name">${personalityTypes[myKey].charName}</div>
+          <div class="compat-pair-name">${personalityTypes[myKey].name}</div>
         </div>
         <div class="compat-pair-heart">×</div>
         <div class="compat-pair-item" style="background:${theirPt.badge}">
           <span style="font-size:28px">${theirPt.charAvatar}</span>
-          <div class="compat-pair-name">${theirPt.charName}</div>
+          <div class="compat-pair-name">${theirPt.name}</div>
         </div>
       </div>
       <div class="compat-stars">${stars}</div>
