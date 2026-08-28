@@ -247,6 +247,24 @@
   .compat-label { font-size:16px; font-weight:800; color:#1a1a1a; margin-bottom:10px; }
   .compat-desc { font-size:13px; color:#555; line-height:1.7; }
 
+  /* ===== RANKING ===== */
+  .rank-section { background:#faf9f7; border-radius:16px; padding:16px; margin-top:16px; }
+  .rank-section-title { font-size:12px; font-weight:700; color:#888; margin-bottom:12px; letter-spacing:0.05em; }
+  .rank-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .rank-medal { font-size:16px; flex-shrink:0; width:24px; }
+  .rank-name { font-size:12px; font-weight:600; color:#444; width:68px; flex-shrink:0; }
+  .rank-bar-wrap { flex:1; height:10px; background:#ececec; border-radius:50px; overflow:hidden; }
+  .rank-bar { height:100%; border-radius:50px; transition:width 0.8s ease; }
+  .rank-pct { font-size:11px; font-weight:700; color:#888; width:32px; text-align:right; flex-shrink:0; }
+  .axis-row { display:flex; align-items:center; gap:8px; }
+  .axis-label { font-size:11px; font-weight:700; color:#666; width:28px; flex-shrink:0; text-align:center; }
+  .axis-bar-wrap { flex:1; height:12px; border-radius:50px; overflow:hidden; display:flex; }
+  .axis-bar-e { height:100%; background:#FF9966; transition:width 0.8s ease; }
+  .axis-bar-i { height:100%; background:#9BBBD4; transition:width 0.8s ease; }
+  .axis-bar-s { height:100%; background:#C0603B; transition:width 0.8s ease; }
+  .axis-bar-n { height:100%; background:#a18cd1; transition:width 0.8s ease; }
+  .axis-pct-row { display:flex; justify-content:space-between; font-size:10px; color:#aaa; font-weight:600; margin-top:3px; padding:0 36px; }
+
   /* ===== QUICK COMPAT ===== */
   .disclaimer {
     font-size: 10px; color: #bbb; line-height: 1.6;
@@ -995,15 +1013,39 @@ function showResult(){
   document.getElementById('char-tagline').textContent=pt.tagline;
   document.getElementById('char-type-badge').textContent=`${sd.name} × ${eAxis==='E'?'外向':'内向'} × ${sAxis==='S'?'感覚':'直感'}`;
 
-  buildColorTab(sd,pt);
+  buildColorTab(sd,pt,eAxis,sAxis);
   buildPersonaTab(pt);
   buildFortuneTab(pt,sd);
   buildCompatTab(pt,resultTypeKey);
   buildShareTab(pt,sd,eAxis,sAxis);
 }
 
-function buildColorTab(sd,pt){
+function buildColorTab(sd,pt,eAxis,sAxis){
   const tab=document.getElementById('tab-color');
+
+  // カラースコアランキング
+  const seasonOrder = Object.entries(colorScores).sort((a,b)=>b[1]-a[1]);
+  const totalColor = Object.values(colorScores).reduce((s,v)=>s+v,0)||1;
+  const seasonInfo = {spring:{name:'スプリング',color:'#FF9966'},summer:{name:'サマー',color:'#9BBBD4'},autumn:{name:'オータム',color:'#C0603B'},winter:{name:'ウィンター',color:'#3B5FD4'}};
+  const rankEmoji = ['🥇','🥈','🥉','4️⃣'];
+  const colorRankHTML = seasonOrder.map(([k,v],i)=>{
+    const pct = Math.round(v/totalColor*100);
+    return `<div class="rank-row">
+      <span class="rank-medal">${rankEmoji[i]}</span>
+      <span class="rank-name">${seasonInfo[k].name}</span>
+      <div class="rank-bar-wrap"><div class="rank-bar" style="width:${pct}%;background:${seasonInfo[k].color}"></div></div>
+      <span class="rank-pct">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  // 性格軸スコア
+  const totalE = personaScores.E+personaScores.I||1;
+  const totalS = personaScores.S+personaScores.N||1;
+  const ePct = Math.round(personaScores.E/totalE*100);
+  const iPct = 100-ePct;
+  const sPct = Math.round(personaScores.S/totalS*100);
+  const nPct = 100-sPct;
+
   tab.innerHTML=`
     <div class="season-header">
       <div class="season-dot" style="background:${sd.color}"></div>
@@ -1012,6 +1054,33 @@ function buildColorTab(sd,pt){
     <div class="section-desc">${sd.colorDesc}</div>
     <div class="palette-label">ベストカラー</div>
     <div class="palette-row" id="ps"></div>
+
+    <div class="rank-section">
+      <div class="rank-section-title">🏆 カラースコアランキング</div>
+      ${colorRankHTML}
+    </div>
+
+    <div class="rank-section">
+      <div class="rank-section-title">🧠 性格軸スコア</div>
+      <div class="axis-row">
+        <span class="axis-label">外向</span>
+        <div class="axis-bar-wrap">
+          <div class="axis-bar-e" style="width:${ePct}%"></div>
+          <div class="axis-bar-i" style="width:${iPct}%"></div>
+        </div>
+        <span class="axis-label">内向</span>
+      </div>
+      <div class="axis-pct-row"><span>${ePct}%</span><span>${iPct}%</span></div>
+      <div class="axis-row" style="margin-top:10px">
+        <span class="axis-label">感覚</span>
+        <div class="axis-bar-wrap">
+          <div class="axis-bar-s" style="width:${sPct}%"></div>
+          <div class="axis-bar-n" style="width:${nPct}%"></div>
+        </div>
+        <span class="axis-label">直感</span>
+      </div>
+      <div class="axis-pct-row"><span>${sPct}%</span><span>${nPct}%</span></div>
+    </div>
   `;
   const row=tab.querySelector('#ps');
   sd.palette.forEach(c=>{ const sw=document.createElement('div'); sw.className='swatch'; sw.style.background=c; row.appendChild(sw); });
