@@ -1346,26 +1346,27 @@ function buildShareTab(pt,sd,eAxis,sAxis){
 
 // ===== COMPAT =====
 const compatData = (function(){
-  // シーズン相性スコア(0-2): 同じ=2, イエベ同士/ブルベ同士=1, 異なる=0
+  // シーズン相性スコア(0-2): 異なる=2(違いが魅力), イエベ同士/ブルベ同士=1, 同じ=0
   function seasonScore(a,b){
-    if(a===b) return 2;
+    if(a===b) return 0;
     const ye=['spring','autumn'], bl=['summer','winter'];
     if((ye.includes(a)&&ye.includes(b))||(bl.includes(a)&&bl.includes(b))) return 1;
-    return 0;
+    return 2;
   }
-  // 性格軸相性(0-2): E×I=2(引き合う), S×N=2(補い合う), 同じ=1
+  // 性格軸相性(0-2): E×I違う=1点, S×N違う=1点（違うほど高相性）
   function axisScore(ae,as,be,bs){
-    const e = ae!==be ? 2 : 1;
-    const s = as!==bs ? 2 : 1;
-    return e+s; // 2-4
+    const e = ae!==be ? 1 : 0;
+    const s = as!==bs ? 1 : 0;
+    return e+s; // 0-2
   }
+  // total 0-4 → 星1-5 に均等マッピング
   // メッセージマップ
   const msgs = {
-    '5': {stars:5, label:'運命的な相性✨', desc:'お互いの色が混ざり合うと最高の絵が生まれる。価値観の違いが化学反応を起こし、一緒にいると二人とも輝きが増す。'},
-    '4': {stars:4, label:'とても相性◎', desc:'違いを楽しみながら高め合える関係。相手のペースに合わせることで、さらに深いつながりになる。'},
+    '5': {stars:5, label:'運命的な相性✨', desc:'正反対だからこそ惹かれ合う。お互いの違いが化学反応を起こし、一緒にいると二人とも輝きが増す。'},
+    '4': {stars:4, label:'引き合う相性◎', desc:'違いが魅力になる関係。刺激し合いながら、自然と高め合える。'},
     '3': {stars:3, label:'バランス良し', desc:'似た部分と違う部分が程よく混在。居心地のいい安定感がある。'},
-    '2': {stars:2, label:'刺激的な関係', desc:'共通点は少ないが、だからこそ新鮮。お互いを理解しようとする努力が大切。'},
-    '1': {stars:1, label:'成長できる組合せ', desc:'最初は分かり合えない部分も。でも根気よく関わると意外な共鳴ポイントが見つかる。'},
+    '2': {stars:2, label:'じっくり育つ関係', desc:'共通点は多いが、ぬるくなりがち。意識して新鮮さを保つことが大切。'},
+    '1': {stars:1, label:'鏡のような組合せ', desc:'価値観がよく似ていて安心感はある。ただし似すぎて馴れ合いになる可能性も。'},
   };
   return function(keyA, keyB){
     const [sA, axA] = keyA.split('_');
@@ -1373,8 +1374,8 @@ const compatData = (function(){
     const eA=axA[0], sAx=axA[1], eB=axB[0], sBx=axB[1];
     const ss = seasonScore(sA,sB);
     const as = axisScore(eA,sAx,eB,sBx);
-    const total = ss + as; // 0-6
-    const stars = total<=1?1 : total<=2?2 : total<=3?3 : total<=4?4 : 5;
+    const total = ss + as; // 0-4
+    const stars = total===0?1 : total===1?2 : total===2?3 : total===3?4 : 5;
     return {...msgs[String(stars)], stars};
   };
 })();
