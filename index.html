@@ -328,11 +328,12 @@
   .global-rank-char { font-size:11px; font-weight:600; margin-top:2px; }
   .global-rank-count { font-size:13px; font-weight:800; color:#888; flex-shrink:0; }
   .reload-ranking-btn {
-    width:100%; margin-top:12px; padding:10px; background:#f5f5f5;
-    border:none; border-radius:50px; font-size:12px; font-weight:600;
-    color:#888; cursor:pointer; transition:background 0.2s;
+    display:block; margin:10px auto 0; padding:5px 14px;
+    background:#f0eaf8; border:none; border-radius:50px;
+    font-size:11px; font-weight:700; color:#a18cd1;
+    cursor:pointer; transition:background 0.2s;
   }
-  .reload-ranking-btn:hover { background:#eee; }
+  .reload-ranking-btn:hover { background:#e4d8f5; }
 
   /* ===== RANKING ===== */
   .rank-section { background:#faf9f7; border-radius:16px; padding:16px; margin-top:16px; }
@@ -500,7 +501,7 @@ window.loadRanking = async function() {
   if(!el) return;
   el.innerHTML = '<div class="rank-loading">読み込み中...</div>';
   try {
-    const q = query(collection(db, 'rankings'), orderBy('count','desc'), limit(16));
+    const q = query(collection(db, 'rankings'), orderBy('count','desc'), limit(10));
     const snap = await getDocs(q);
     if(snap.empty){ el.innerHTML='<div class="rank-loading">まだデータがありません</div>'; return; }
     const seasonColors = {spring:'#FF9966',summer:'#9BBBD4',autumn:'#C0603B',winter:'#3B5FD4'};
@@ -572,7 +573,7 @@ window._firebaseReady = true;
     <!-- Global Ranking -->
     <div class="typelist-wrap">
       <div class="typelist-title">🌍 みんなの診断結果ランキング</div>
-      <div class="typelist-subtitle">リアルタイム集計</div>
+      <div class="typelist-subtitle"></div>
       <div id="global-ranking-list"><div class="rank-loading">読み込み中...</div></div>
       <button class="reload-ranking-btn" onclick="if(window.loadRanking) window.loadRanking()">🔄 更新</button>
     </div>
